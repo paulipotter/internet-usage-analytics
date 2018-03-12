@@ -22,7 +22,7 @@ class NewsSource(models.Model):
     name = models.CharField(max_length=20)
 
 
-class Devices(models.Model):
+class Device(models.Model):
     key = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=20)
 
@@ -55,7 +55,7 @@ class ScamType(models.Model):
 class City(models.Model):
     key = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=20)
-    department = models.ForeignKey(Department)
+    department = models.ForeignKey(Department, on_delete=models.PROTECT)
 
 
 class Entry(models.Model):
@@ -66,7 +66,7 @@ class Entry(models.Model):
     social_media = models.OneToOneField(SocialMedia)
     news_source = models.OneToOneField(NewsSource)
     internet_trust = models.OneToOneField(TrustLevel)
-    preferred_device = OneToOneField.ForeignKey(Devices)
+    preferred_device = OneToOneField.ForeignKey(Devices, on_delete=models.PROTECT)
     gender = models.OneToOneField(Gender)
 
 
@@ -87,40 +87,40 @@ class PCRecurrence(models.Model):
 
 class Scam(models.Model):
     entry_id = models.OneToOneField(Entry, primary_key=True)  # Entry
-    reported = models.ForeignKey(BinaryEntry)
-    scam_type = models.ForeignKey(ScamType)
+    reported = models.ForeignKey(BinaryEntry, on_delete=models.PROTECT)
+    scam_type = models.ForeignKey(ScamType, on_delete=models.PROTECT)
 
 
-class Smartphones(models.Model):
+class Smartphone(models.Model):
     entry_id = models.OneToOneField(Entry, primary_key=True)  # Entry
     quantity = models.IntegerField()
-    utilize = models.ForeignKey(BinaryEntry)
-    home = models.ForeignKey(BinaryEntry)
+    utilize = models.ForeignKey(BinaryEntry, on_delete=models.PROTECT)
+    home = models.ForeignKey(BinaryEntry, on_delete=models.PROTECT)
 
 
-class Cellphones(models.Model):
+class Cellphone(models.Model):
     entry_id = models.OneToOneField(Entry, primary_key=True)  # Entry
     quantity = models.IntegerField()
-    utilize = models.ForeignKey(BinaryEntry)
-    home = models.ForeignKey(BinaryEntry)
+    utilize = models.ForeignKey(BinaryEntry, on_delete=models.PROTECT)
+    home = models.ForeignKey(BinaryEntry, on_delete=models.PROTECT)
 
 
-class Tablets(models.Model):
+class Tablet(models.Model):
     entry_id = models.OneToOneField(Entry, primary_key=True)  # Entry
     quantity = models.IntegerField()
-    utilize = models.ForeignKey(BinaryEntry)
-    home = models.ForeignKey(BinaryEntry)
+    utilize = models.ForeignKey(BinaryEntry, on_delete=models.PROTECT)
+    home = models.ForeignKey(BinaryEntry, on_delete=models.PROTECT)
 
 
-class Laptops(models.Model):
+class Laptop(models.Model):
     entry_id = models.OneToOneField(Entry, primary_key=True)
     quantity = models.IntegerField()
-    utilize = models.ForeignKey(BinaryEntry)
-    home = models.ForeignKey(BinaryEntry)
+    utilize = models.ForeignKey(BinaryEntry, on_delete=models.PROTECT)
+    home = models.ForeignKey(BinaryEntry, on_delete=models.PROTECT)
 
 
-class PCs(models.Model):
+class PC(models.Model):
     entry_id = models.OneToOneField(Entry, primary_key=True)
     quantity = models.IntegerField()
-    utilize = models.ForeignKey(BinaryEntry)
-    home = models.ForeignKey(BinaryEntry)
+    utilize = models.ForeignKey(BinaryEntry, on_delete=models.PROTECT)
+    home = models.ForeignKey(BinaryEntry, on_delete=models.PROTECT)
