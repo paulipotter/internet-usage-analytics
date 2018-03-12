@@ -8,47 +8,66 @@ class SocialMediaAdmin(admin.ModelAdmin):
     list_display = ()
 
 class AgeGroupAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class GenderAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class NewsSourceAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class DeviceAdmin(admin.ModelAdmin):
-
+    list_display = ()
 
 class TrustLevelAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class DepartmentAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class BinaryEntryAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class RecurrenceAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class ScamTypeAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class CityAdmin(admin.ModelAdmin):
+    list_display = ()
 
 
 class EntryAdmin(admin.ModelAdmin):
+    list_display = ()
 
 
 class SmartphoneRecurrenceAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class LaptopRecurrenceAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class PCRecurrenceAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class ScamAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class SmartphoneAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class CellphoneAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class TabletAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class LaptopAdmin(admin.ModelAdmin):
+    list_display = ()
 
 class PCAdmin(admin.ModelAdmin):
+    list_display = ()
 
 # Register your models here.
 
