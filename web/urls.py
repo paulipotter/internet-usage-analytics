@@ -15,7 +15,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
+from app import views
+from django.contrib.auth import views as auth_views
+admin.autodiscover()
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
+urlpatterns = []
+
+# Debug Toolbar
+if settings.DEBUG:
+    import debug_toolbar
+    from django.contrib.staticfiles import views as staticviews
+    from django.conf.urls.static import static
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+        url(r'^static/(?P<path>.*)$', staticviews.serve),
+    ]
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+normalpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'', views.home, name='home'),
+    url(r'^upload/', views.parse, name='parse'),
+    rl(r'^simple_upload/', views.simple_upload, name='simple_upload')
 ]
+
+urlpatterns += normalpatterns
