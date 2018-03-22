@@ -3,7 +3,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+app/static/
+package-lock.json
 # C extensions
 *.so
 app/migrations/0001_initial.py
