@@ -39,7 +39,7 @@ normalpatterns = [
     url(r'', views.home, name='home'),
     url(r'^results/', views.results, name='results'),
     #url(r'^upload/', views.parse, name='parse'),
-    #rl(r'^simple_upload/', views.simple_upload, name='simple_upload')
+    url(r'^simple_upload/', views.simple_upload, name='simple_upload')
 ]
 
 urlpatterns += normalpatterns

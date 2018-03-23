@@ -5,74 +5,72 @@ from .models import ScamType, City, Entry, SmartphoneRecurrence, LaptopRecurrenc
 from .models import PCRecurrence, Scam, Smartphone, Cellphone, Tablet, Laptop
 
 class SocialMediaAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('name',)
 
 class AgeGroupAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('group',)
 
 class GenderAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('gender',)
 
 class NewsSourceAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('name',)
 
 class DeviceAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('name',)
 
 class TrustLevelAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('level',)
 
 class DepartmentAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('key', 'name')
 
 class BinaryEntryAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('answer',)
 
 class RecurrenceAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('recurrence',)
 
 class ScamTypeAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('name',)
 
 class CityAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('name', 'department')
 
 
 class EntryAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('entry_id', 'household_size', 'age', 'city', 'social_media',
+    'news_source', 'internet_trust', 'preferred_device', 'gender')
 
 
 class SmartphoneRecurrenceAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('entry_id', 'key')
 
 class LaptopRecurrenceAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('entry_id', 'key')
 
 class PCRecurrenceAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('entry_id', 'key')
 
 class ScamAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('reported', 'scam_type')
 
 class SmartphoneAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('entry_id', 'quantity', 'utilize', 'home')
 
 class CellphoneAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('entry_id', 'quantity', 'utilize', 'home')
 
 class TabletAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('entry_id', 'quantity', 'utilize', 'home')
 
 class LaptopAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('entry_id', 'quantity', 'utilize', 'home')
 
 class PCAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('entry_id', 'quantity', 'utilize', 'home')
 
 # Register your models here.
-
-
-
 admin.site.register(SocialMedia, SocialMediaAdmin)
 admin.site.register(AgeGroup, AgeGroupAdmin)
 admin.site.register(Gender, GenderAdmin)
