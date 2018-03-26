@@ -38,8 +38,8 @@ normalpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', views.home, name='home'),
     url(r'^results/', views.results, name='results'),
-    #url(r'^upload/', views.parse, name='parse'),
-    url(r'^simple_upload/', views.simple_upload, name='simple_upload')
+    url(r'^simple_upload/', views.simple_upload, name='simple_upload'),
+    url(r'^three/', views.three, name='three')
 ]
 
 urlpatterns += normalpatterns

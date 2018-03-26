@@ -3,5 +3,5 @@
 {% load staticfiles %}
 {% block content %}
 
-  <h1>Hi</h1>
+  <h1>Three</h1>
 {% endblock %}
