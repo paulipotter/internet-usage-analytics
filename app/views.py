@@ -13,6 +13,7 @@ import pandas as pd
 # Create your views here.
 def home(request):
     print("home")
+    # when "upload file" gets clicked
     if request.method == 'POST':
         new_types = request.FILES['myfile']
         # if dict is not empty
@@ -28,25 +29,26 @@ def home(request):
             col1_dataframe = csv[[column[0]]]
             col2_dataframe = csv[[column[1]]]
 
-            two_col_file = ["social_media.csv", "age_group.csv", "gender.csv",
-            "news_source.csv", "devices.csv", "trust_level.csv", "departments.csv",
-            "binary_entry.csv", "recurrence.csv", "scam_type.csv"]
+            two_col_file = ["SocialMedia.csv", "AgeGroup.csv", "Gender.csv",
+            "NewsSource.csv", "Devices.csv", "TrustLevel.csv", "Department.csv",
+            "BinaryEntry.csv", "Recurrence.csv", "ScamType.csv"]
 
-            recurrence_file = ["laptop_recurrence.csv",
-                               "pc_recurrence.csv", "smartphone_recurrence.csv"]
+            recurrence_file = ["LaptopRecurrence.csv",
+                               "PCRecurrence.csv", "SmartphoneRecurrence.csv"]
 
-            device_file = ["tablets.csv", "smartphones.csv", "pcs.csv",
-                           "laptops.csv", "cellphones.csv"]
+            device_file = ["Tablets.csv", "Smartphones.csv", "PCs.csv",
+                           "Laptops.csv", "Cellphones.csv"]
 
             if filename in two_col_file:
                 print(column)
+                command = ""
                 for value in range(csv.shape[0]): # no. of rows to be read
                     col1_value = int(col1_dataframe.at[value,column[0]])
                     col2_value = str(col2_dataframe.at[value,column[1]])
-                    # AgeGroup.objects.get(key=col1_value).type.add(col2_value)
+                    command=filename.split(".")[0]+".objects.create(key=col1_value).type.add(col2_value)""
                     print(filename.split(".")[0]+' added ' + str(col1_value) + ' ' + str(col2_value))
 
-            elif filename == "entries.csv":
+            elif filename == "Entry.csv":
                 for value in range(csv.shape[0]):
                     col1_value = int(col1_dataframe.at[value,column[0]]) # entry_id
                     col2_value = int(col2_dataframe.at[value,column[1]]) # household_size
@@ -72,6 +74,17 @@ def home(request):
                     col2_value = int(col2_dataframe.at[value,column[1]])
                 print(col_names) # key, gender
 
+            elif filename in device_file:
+                command = ""
+                for value in range(csv.shape[0]):
+                    col1_value = int(col1_dataframe.at[value,column[0]]) # entry_id
+                    col2_value = int(col2_dataframe.at[value,column[1]]) # quantity
+                    col3_value = int(col2_dataframe.at[value,column[2]]) # utilize
+                    col4_value = int(col2_dataframe.at[value,column[3]]) # home
+                command = filename.split(".")[0] + "objects.create( entry_id="
+                command += col1_val+",quantity ="+col2_value+",utilize="+col3_value
+                command += ",home="+col4_value+")"  
+                print(col_names) # key, gender
 
     return render(request, 'home.html')
 
