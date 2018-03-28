@@ -124,5 +124,3 @@ class PCs(models.Model):
     quantity = models.IntegerField()
     utilize = models.ForeignKey(BinaryEntry)
     home = models.ForeignKey(BinaryEntry)
-
-
