@@ -9,7 +9,7 @@ class SocialMedia(models.Model):
 
 class AgeGroup(models.Model):
     key = models.IntegerField(primary_key=True)
-    group = models.CharField(max_length=20)
+    name = models.CharField(max_length=20)
 
 
 class Gender(models.Model):
@@ -22,7 +22,7 @@ class NewsSource(models.Model):
     name = models.CharField(max_length=20)
 
 
-class Devices(models.Model):
+class Device(models.Model):
     key = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=20)
 
@@ -91,35 +91,35 @@ class Scam(models.Model):
     scam_type = models.ForeignKey(ScamType)
 
 
-class Smartphones(models.Model):
+class Smartphone(models.Model):
     entry_id = models.OneToOneField(Entry, primary_key=True)  # Entry
     quantity = models.IntegerField()
     utilize = models.ForeignKey(BinaryEntry)
     home = models.ForeignKey(BinaryEntry)
 
 
-class Cellphones(models.Model):
+class Cellphone(models.Model):
     entry_id = models.OneToOneField(Entry, primary_key=True)  # Entry
     quantity = models.IntegerField()
     utilize = models.ForeignKey(BinaryEntry)
     home = models.ForeignKey(BinaryEntry)
 
 
-class Tablets(models.Model):
+class Tablet(models.Model):
     entry_id = models.OneToOneField(Entry, primary_key=True)  # Entry
     quantity = models.IntegerField()
     utilize = models.ForeignKey(BinaryEntry)
     home = models.ForeignKey(BinaryEntry)
 
 
-class Laptops(models.Model):
+class Laptop(models.Model):
     entry_id = models.OneToOneField(Entry, primary_key=True)
     quantity = models.IntegerField()
     utilize = models.ForeignKey(BinaryEntry)
     home = models.ForeignKey(BinaryEntry)
 
 
-class PCs(models.Model):
+class PC(models.Model):
     entry_id = models.OneToOneField(Entry, primary_key=True)
     quantity = models.IntegerField()
     utilize = models.ForeignKey(BinaryEntry)
