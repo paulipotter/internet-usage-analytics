@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.contrib import messages
 from django import forms
 from .models import AgeGroup, SocialMedia, Gender, NewsSource, Device, TrustLevel
 from .models import Department, BinaryEntry, Recurrence, ScamType, LaptopRecurrence
@@ -44,13 +45,15 @@ def home(request):
 
             if filename in two_col_file:
                 print(column)
-                command = ""
                 for value in range(csv.shape[0]): # no. of rows to be read
+                    command = ""
                     col1_value = int(col1_dataframe.at[value,column[0]])
                     col2_value = str(col2_dataframe.at[value,column[1]])
                     command = filename.split(".")[0]+".objects.create(key="
-                    command += col1_value+", name="+col2_value+")"
-
+                    command += str(col1_value)+", name="+str(col2_value)+")"
+                    print(command)
+                    exec(command)
+                messages.info(request, str(filename+" processed"))
                     # print(filename.split(".")[0]+' added ' + str(col1_value) + ' ' + str(col2_value))
 
             elif filename == "Entry.csv":
@@ -73,6 +76,7 @@ def home(request):
                     command += ",gender"+col9_value+")"
                     print(command)
                     exec(command)
+                messages.info(request, str(filename+" processed"))
                     # AgeGroup.objects.get(key=col1_value).type.add(col2_value)
                     # print(filename.split(".")[0]+' added ' + str(col1_value) + ' ' + str(col2_value))
 
@@ -86,9 +90,11 @@ def home(request):
                     command = col1_value+",name="+col2_value+",department="+col3_value
                     print(command)
                     exec(command)
+                messages.info(request, str(filename+" processed"))
 
             elif filename in recurrence_file:
                 for value in range(csv.shape[0]):
+                    command = ""
                     col1_value = int(col1_dataframe.at[value,column[0]])
                     col2_value = int(col2_dataframe.at[value,column[1]])
                     # #build command
@@ -111,7 +117,7 @@ def home(request):
                     print(command)
                     exec(command)
                 print(col_names) # key, gender
-
+                messages.info(request, str(filename+" processed"))
     return render(request, 'home.html')
 
 def results(request):

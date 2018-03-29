@@ -14,7 +14,7 @@ class AgeGroup(models.Model):
 
 class Gender(models.Model):
     key = models.IntegerField(primary_key=True)
-    gender = models.CharField(max_length=20)
+    name = models.CharField(max_length=20)
 
 
 class NewsSource(models.Model):
