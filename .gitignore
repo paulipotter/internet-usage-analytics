@@ -5,7 +5,16 @@ __pycache__/
 *$py.class
 app/static/
 package-lock.json
+*.pyc
+*~
+__pycache__
+myvenv
+db.sqlite3
+/static
+.DS_Store
 # C extensions
+/temp
+
 *.so
 app/migrations/0001_initial.py
 # Distribution / packaging
