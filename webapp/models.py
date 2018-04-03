@@ -62,103 +62,132 @@ class Entry(models.Model):
     entry_id = models.IntegerField(primary_key=True)
     household_size = models.IntegerField()
     age = models.IntegerField()
-    city = models.ForeignKey(City, on_delete=models.PROTECT)
-    social_media = models.ForeignKey(SocialMedia, on_delete=models.PROTECT)
-    news_source = models.ForeignKey(NewsSource, on_delete=models.PROTECT)
-    internet_trust = models.ForeignKey(TrustLevel, on_delete=models.PROTECT)
-    preferred_device = models.ForeignKey(Device, on_delete=models.PROTECT)
-    gender = models.ForeignKey(Gender, on_delete=models.PROTECT)
+    city = models.ForeignKey(City,
+                    on_delete=models.PROTECT)
+    social_media = models.ForeignKey(SocialMedia,
+                    on_delete=models.PROTECT)
+    news_source = models.ForeignKey(NewsSource,
+                    on_delete=models.PROTECT)
+    internet_trust = models.ForeignKey(TrustLevel,
+                    on_delete=models.PROTECT)
+    preferred_device = models.ForeignKey(Device,
+                    on_delete=models.PROTECT)
+    gender = models.ForeignKey(Gender,
+                    on_delete=models.PROTECT)
 
 
 class SmartphoneRecurrence(models.Model):
     entry_id = models.OneToOneField(Entry,
                 primary_key=True,
                 on_delete=models.PROTECT)  # Entry
-    key = models.ForeignKey(Recurrence,on_delete=models.PROTECT)  # recurrence id
+    key = models.ForeignKey(Recurrence,
+                on_delete=models.PROTECT)  # recurrence id
 
 
 class LaptopRecurrence(models.Model):
     entry_id = models.OneToOneField(Entry,
                 primary_key=True,
                 on_delete=models.PROTECT)  # Entry
-    key = models.ForeignKey(Recurrence,on_delete=models.PROTECT)  # recurrence id
+    key = models.ForeignKey(Recurrence,
+                on_delete=models.PROTECT)  # recurrence id
 
 
 class PCRecurrence(models.Model):
     entry_id = models.OneToOneField(Entry,
                 primary_key=True,
                 on_delete=models.PROTECT)  # Entry
-    key = models.ForeignKey(Recurrence,on_delete=models.PROTECT)  # recurrence id
+    key = models.ForeignKey(Recurrence,
+                on_delete=models.PROTECT)  # recurrence id
 
 
 class Scam(models.Model):
     entry_id = models.OneToOneField(Entry,
                 primary_key=True,
-                on_delete=models.PROTECT)  # Entry
-    reported = models.ForeignKey(BinaryEntry, on_delete=models.PROTECT)
-    scam_type = models.ForeignKey(ScamType, on_delete=models.PROTECT)
+                on_delete=models.PROTECT,
+                db_column='entry_id')  # Entry
+    reported = models.ForeignKey(BinaryEntry,
+                on_delete=models.PROTECT,
+                db_column='reported')
+    scam_type = models.ForeignKey(ScamType,
+                on_delete=models.PROTECT,
+                db_column='scam_type')
 
 
 class Smartphone(models.Model):
     entry_id = models.OneToOneField(Entry,
                 primary_key=True,
-                on_delete=models.PROTECT)  # Entry
+                on_delete=models.PROTECT,
+                db_column='entry_id')  # Entry
     quantity = models.IntegerField()
     utilize = models.ForeignKey(BinaryEntry,
                 on_delete=models.PROTECT,
-                related_name='smartphone_use')
+                related_name='smartphone_use',
+                db_column='utilize')
     home = models.ForeignKey(BinaryEntry,
-            on_delete=models.PROTECT,
-            related_name='smartphone_home')
+                on_delete=models.PROTECT,
+                related_name='smartphone_home',
+                db_column='home')
 
 
 class Cellphone(models.Model):
     entry_id = models.OneToOneField(Entry,
                 primary_key=True,
-                on_delete=models.PROTECT)  # Entry
+                on_delete=models.PROTECT,
+                db_column='entry_id')  # Entry
     quantity = models.IntegerField()
     utilize = models.ForeignKey(BinaryEntry,
                 on_delete=models.PROTECT,
-                related_name='cellphone_use')
+                related_name='cellphone_use',
+                db_column='utilize')
     home = models.ForeignKey(BinaryEntry,
             on_delete=models.PROTECT,
-            related_name='cellphone_home')
+            related_name='cellphone_home',
+            db_column='home')
 
 
 class Tablet(models.Model):
     entry_id = models.OneToOneField(Entry,
                 primary_key=True,
-                on_delete=models.PROTECT)  # Entry
+                on_delete=models.PROTECT,
+                db_column='entry_id')  # Entry
     quantity = models.IntegerField()
     utilize = models.ForeignKey(BinaryEntry,
                 on_delete=models.PROTECT,
-                related_name='tablet_use')
+                related_name='tablet_use',
+                db_column='utilize')
     home = models.ForeignKey(BinaryEntry,
             on_delete=models.PROTECT,
-            related_name='tablet_home')
+            related_name='tablet_home',
+            db_column='home')
 
 
 class Laptop(models.Model):
     entry_id = models.OneToOneField(Entry,
                 primary_key=True,
-                on_delete=models.PROTECT)
+                on_delete=models.PROTECT,
+                db_column='entry_id')
     quantity = models.IntegerField()
     utilize = models.ForeignKey(BinaryEntry,
                 on_delete=models.PROTECT,
-                related_name='laptop_use')
+                related_name='laptop_use',
+                db_column='utilize')
     home = models.ForeignKey(BinaryEntry,
             on_delete=models.PROTECT,
-            related_name='laptop_home')
+            related_name='laptop_home',
+            db_column='home')
 
 
 class PC(models.Model):
     entry_id = models.OneToOneField(Entry,
                 primary_key=True,
-                on_delete=models.PROTECT)
+                on_delete=models.PROTECT,
+                db_column='entry_id')
     quantity = models.IntegerField()
     utilize = models.ForeignKey(BinaryEntry,
                 on_delete=models.PROTECT,
-                related_name='pc_use')
+                related_name='pc_use',
+                db_column='utilize')
     home = models.ForeignKey(BinaryEntry,
             on_delete=models.PROTECT,
-            related_name='pc_home')
+            related_name='pc_home',
+            db_column='home')

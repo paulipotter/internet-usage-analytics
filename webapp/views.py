@@ -9,7 +9,7 @@ from django import forms
 from .models import AgeGroup, SocialMedia, Gender, NewsSource, Device, TrustLevel
 from .models import Department, BinaryEntry, Recurrence, ScamType, LaptopRecurrence
 from .models import PCRecurrence, SmartphoneRecurrence, Tablet, Smartphone
-from .models import PC, Laptop, Cellphone, Entry, City
+from .models import PC, Laptop, Cellphone, Entry, City, Scam
 import ast
 from django.contrib.auth.models import User
 import json
@@ -89,6 +89,10 @@ def home(request):
                                          internet_trust=TrustLevel.objects.get(key=col7_value),
                                          preferred_device=Device.objects.get(key=col8_value),
                                          gender=Gender.objects.get(key=col9_value))
+                    lin = filename.split(".")[0]+' added ' + str(col1_value) + ' ' + str(col2_value)
+                    lin += ' ' + str(col3_value)+ ' ' + str(col4_value)+ ' ' + str(col5_value)
+                    lin += ' ' + str(col6_value)+ ' ' + str(col7_value)+ ' ' + str(col8_value)+ ' ' + str(col9_value)
+                    print(lin)
                     # command = filename.split(".")[0]+".objects.create("+column[0]+"="
                     # command += col1_value+","+column[1]+"="+col2_value
                     # command += ","+column[2]+"="+col3_value+","+column[3]+"=\'"+col4_value+"\',"+column[4]+"=\'"
@@ -97,11 +101,9 @@ def home(request):
                     # command += "\',"+column[8]+"=\'"+col9_value+"\')"
                     #
                     # print(command)
-                    print('\n\n\n', column)
                     #exec(command)
-                messages.info(request, str(filename+" processed"))
+
                     # AgeGroup.objects.get(key=col1_value).type.add(col2_value)
-                    # print(filename.split(".")[0]+' added ' + str(col1_value) + ' ' + str(col2_value))
 
             elif filename == "City.csv":
                 col1_dataframe = csv[[column[0]]]
@@ -116,7 +118,9 @@ def home(request):
                     dept = Department.objects.get(key=col3_value)
 
                     City.objects.create(key=col1_value,name=col2_value,department=dept)
-                    print(command)
+                    lin = filename.split(".")[0]+' added ' + str(col1_value) + ' ' + str(col2_value)
+                    lin += ' ' + str(col3_value)
+                    print(lin)
                     #exec(command)
                 messages.info(request, str(filename+" processed"))
 
@@ -126,18 +130,20 @@ def home(request):
                 col3_dataframe = csv[[column[2]]]
 
                 for value in range(csv.shape[0]):
-                    command = ""
                     col1_value = str(col1_dataframe.at[value,column[0]]) # entry_id
                     col2_value = str(col2_dataframe.at[value,column[1]]) # reported
                     col3_value = str(col3_dataframe.at[value,column[2]]) # scam_type
-                    command = filename.split(".")[0] + ".objects.create(entry_id="
+
+                    entry = Entry.objects.get(entry_id=col1_value)
+                    rep = BinaryEntry.objects.get(key=col2_value)
+                    stype = ScamType.objects.get(key=col3_value)
+
+                    Scam.objects.create(entry_id=entry,reported=rep,scam_type=stype)
+                    command=""
+                    command = "Scam.objects.create(entry_id="
                     command += col1_value+",reported="+col2_value+","
                     command += "scam_type="+col3_value+")"
-                    print("\n\n\n\n\n")
-
                     print(command)
-                    exec(command)
-                messages.info(request, str(filename+" processed"))
 
             elif filename in recurrence_file:
                 col1_dataframe = csv[[column[0]]]
@@ -145,14 +151,17 @@ def home(request):
 
                 for value in range(csv.shape[0]):
                     command = ""
-                    col1_value = int(col1_dataframe.at[value,column[0]])
-                    col2_value = int(col2_dataframe.at[value,column[1]])
-                    # build command
-                    command = filename.split(".")[0] + ".objects.create("+column[0]+"="
-                    command += str(col1_value)+","+column[1]+"="+str(col2_value)+")"
-                    print(command)
-                    exec(command)
-                print(col_names) # key, gender
+                    col1_value = int(col1_dataframe.at[value,column[0]]) # entry_id
+                    col2_value = int(col2_dataframe.at[value,column[1]]) # recurrence
+                    entry = Entry.objects.get(entry_id=col1_value)
+                    recurrence = Recurrence.objects.get(key=col2_value)
+                    if filename.split(".")[0] == "LaptopRecurrence":
+                        LaptopRecurrence.objects.create(entry_id=entry, key=recurrence)
+                    elif filename.split(".")[0] == "PCRecurrence":
+                        PCRecurrence.objects.create(entry_id=entry, key=recurrence)
+                    elif filename.split(".")[0] == "SmartphoneRecurrence":
+                        SmartphoneRecurrence.objects.create(entry_id=entry, key=recurrence)
+                    print(filename.split(".")[0] + " created " + str(col1_value) + " " + str(col2_value) )
 
             elif filename in device_file:
                 col1_dataframe = csv[[column[0]]]
@@ -161,18 +170,34 @@ def home(request):
                 col4_dataframe = csv[[column[3]]]
 
                 for value in range(csv.shape[0]):
-                    command = ""
-                    col1_value = int(col1_dataframe.at[value,column[0]]) # entry_id
-                    col2_value = int(col2_dataframe.at[value,column[1]]) # quantity
-                    col3_value = int(col2_dataframe.at[value,column[2]]) # utilize
-                    col4_value = int(col2_dataframe.at[value,column[3]]) # home
-                    command = filename.split(".")[0] + ".objects.create("+column[0]+"="
-                    command += col1_value+","+column[1]+" ="+col2_value+","+column[2]+"="+col3_value
-                    command += ","+column[3]+"="+col4_value+")"
-                    print(command)
-                    exec(command)
-                print(col_names) # key, gender
-                messages.info(request, str(filename+" processed"))
+                    #print('\n\n\n test')
+                    col1_value = str(col1_dataframe.at[value,column[0]]) # entry_id
+                    col2_value = str(col2_dataframe.at[value,column[1]]) # quantity
+                    col3_value = str(col3_dataframe.at[value,column[2]]) # utilize
+                    col4_value = str(col4_dataframe.at[value,column[3]]) # home
+                    #print('\n\n\n', col1_value)
+                    # #
+                    entry = Entry.objects.get(entry_id=col1_value)
+                    use = BinaryEntry.objects.get(key=col3_value)
+                    hom = BinaryEntry.objects.get(key=col4_value)
+
+                    # if filename.split(".")[0] == "Laptop":
+                    #     Laptop.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
+                    # elif filename.split(".")[0] == "PC":
+                    #     PC.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
+                    # elif filename.split(".")[0] == "Smartphone":
+                    #     Smartphone.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
+                    # if filename.split(".")[0] == "Cellphone":
+                    #     Cellphone.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
+                    # elif filename.split(".")[0] == "Tablet":
+                    #     PC.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
+                    # el
+                    # if filename.split(".")[0] == "Smartphone":
+                    Smartphone.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
+                    print(filename.split(".")[0] + " created " + col1_value + " " + col2_value + " "+col3_value +" "+ col4_value)
+
+
+
     return render(request, 'home.html')
 
 def results(request):

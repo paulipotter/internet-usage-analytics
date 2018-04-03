@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from django.conf import settings
-from app import views
+from webapp import views
 from django.contrib.auth import views as auth_views
 admin.autodiscover()
 
