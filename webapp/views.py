@@ -196,15 +196,15 @@ def home(request):
                     Smartphone.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
                     print(filename.split(".")[0] + " created " + col1_value + " " + col2_value + " "+col3_value +" "+ col4_value)
 
-
-
     return render(request, 'home.html')
 
 def results(request):
+
     return render(request, 'results.html')
+
 def simple_upload(request):
-    print("import\n\n\n")
     return render(request, 'simple_upload.html')
+
 def three(request):
     print("three\n\n\n")
     return render(request, 'three.html')
