@@ -1,6 +1,6 @@
 $(document).ready(function(){
     animateValue("entries", 0, 900, 1500);
-    console.log("inside results js")
+    console.log("inside results.js")
 })
 // https://stackoverflow.com/questions/16994662/count-animation-from-number-a-to-b
 function animateValue(id, start, end, duration) {

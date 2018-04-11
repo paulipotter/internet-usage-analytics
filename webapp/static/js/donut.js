@@ -1,10 +1,14 @@
 $(document).ready(function() {
 // $(document).foundation();
     console.log('doc ready');
-    var donutData = genData();
+    var i = 0;
+    //for (var i = 0; i < 3; i++) {
+    //var str = String('#donut-charts'+i)
+    var donutData = genData(i);
     var donuts = new DonutCharts();
     donuts.create(donutData);
     //console.log("hi")
+    //}
     $('#refresh-btn').on('click', function refresh() {donuts.update(genData);});
 
     var donutData2 = genData2();
@@ -20,14 +24,15 @@ $(document).ready(function() {
 //     console.log("hi");
 //     $('#refresh-btn').on('click', function refresh() {donuts.update(genData)
 //     })
-$(function() {
-    var donutData = genData();
-    var donuts = new DonutCharts();
-    donuts.create(donutData);
-    $('#refresh-btn').on('click', function refresh() {donuts.update(genData);});
-});
+// $(function() {
+//     var donutData = genData();
+//     var donuts = new DonutCharts();
+//     donuts.create(donutData);
+//     $('#refresh-btn').on('click', function refresh() {donuts.update(genData);});
+// });
 
 function DonutCharts() {
+    //console.log(str)
     var charts = d3.select('#donut-charts');
     var chart_m, chart_r, color = d3.scale.category20();
     var getCatNames = function(dataset) {
@@ -277,15 +282,15 @@ function DonutCharts() {
     /*
      * Returns a json-like object.
      */
-function genData() {
+function genData(i) {
     var type = ['Gender', 'Age Group', 'Preferred Device'];
     var unit = ['', '', ''];
     var cat = ['Google Drive', 'Dropbox', 'iCloud', 'OneDrive', 'Box'];
 
     var dataset = new Array();
 
-    for (var i = 0; i < type.length; i++) {
-        console.log("donut "+ i)
+    // for (var i = 0; i < type.length; i++) {
+        //console.log("donut "+ i)
         var data = new Array();
         var total = 0;
 
@@ -304,7 +309,7 @@ function genData() {
             "data": data,
             "total": total
         });
-    }
+    //}
     return dataset;
 }
 
@@ -558,10 +563,10 @@ function DonutCharts2() {
     * Returns a json-like object.
     */
 function genData2() {
-    var dataset = new Array();
-    var data = new Array();
-    var total = 0;
-
+    var dataset2 = new Array();
+    var data2 = new Array();
+    var total2 = 0;
+    console.log(donuts)
     // donuts = {
     //     "gender":[{"label":"female", "count":Entry.objects.filter(gender=2).count()},
     //               {"label":"male", "count":Entry.objects.filter(gender=1).count()}]
@@ -581,18 +586,19 @@ function genData2() {
         console.log(key)
         for( var i = 0; i < donuts[key].length;i++)
         {
-            data.push({
+            data2.push({
                 "cat":donuts[key]['label'],
                 "value":donuts[key][i]['count']
             });
-            total += donuts[key][i]['count']
+            total2 += donuts[key][i]['count']
         }
-        dataset.push({
+        dataset2.push({
             "type": key,
             "unit": '',
-            "data": data,
-            "total": total
+            "data": data2,
+            "total": total2
         });
+        total2 = 0;
     }
-   return dataset;
+   return dataset2;
 }

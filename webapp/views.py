@@ -211,11 +211,11 @@ def results(request):
                      {"label":"26-35", "count": Entry.objects.filter(age_group=3).count()},
                      {"label":"36-45", "count": Entry.objects.filter(age_group=4).count()},
                      {"label":"46-65", "count": Entry.objects.filter(age_group=5).count()}],
-        "device": [{"label":"Computer","count":Device.objects.filter(key=1).count()},
-                   {"label":"Cellphone","count":Device.objects.filter(key=2).count()},
-                   {"label":"Tablet","count":Device.objects.filter(key=3).count()},
-                   {"label":"Other","count":Device.objects.filter(key=96).count()},
-                   {"label":"Not Sure","count":Device.objects.filter(key=99).count()}]
+        "device": [{"label":"Computer","count":Entry.objects.filter(preferred_device=1).count()},
+                   {"label":"Cellphone","count":Entry.objects.filter(preferred_device=2).count()},
+                   {"label":"Tablet","count":Entry.objects.filter(preferred_device=3).count()},
+                   {"label":"Other","count":Entry.objects.filter(preferred_device=96).count()},
+                   {"label":"Not Sure","count":Entry.objects.filter(preferred_device=99).count()}]
     }
     # print(donuts)
     return render(request, 'results.html', {"donuts":donuts})
