@@ -1,0 +1,10 @@
+body {
+       font-size: 100%;
+       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+       width: 960px;
+   }
+#refresh-btn {
+       float: right;
+       font-size: 12px;
+       border-radius: 0;
+}

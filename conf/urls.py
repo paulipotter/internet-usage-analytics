@@ -22,7 +22,11 @@ from webapp import views
 from django.contrib.auth import views as auth_views
 admin.autodiscover()
 
-urlpatterns = []
+urlpatterns = [ path('admin/', admin.site.urls),
+                path('', views.home, name='home'),
+                path('results/', views.results, name='results'),
+                path('three/', views.three, name='three')
+                ]
 
 # Debug Toolbar
 if settings.DEBUG:
@@ -35,11 +39,8 @@ if settings.DEBUG:
     ]
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-normalpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'', views.home, name='home'),
-    url(r'^results/', views.results, name='results'),
-    url(r'^three/', views.three, name='three')
-]
-
-urlpatterns += normalpatterns
+# normalpatterns = [
+#     url(r'^results/', views.results, name='results'),
+#     url(r'^three/', views.three, name='three')
+# ]
+# urlpatterns += normalpatterns

@@ -74,6 +74,9 @@ class Entry(models.Model):
                     on_delete=models.PROTECT)
     gender = models.ForeignKey(Gender,
                     on_delete=models.PROTECT)
+    age_group = models.ForeignKey(AgeGroup,
+                    on_delete=models.PROTECT,
+                    db_column='age_group')
 
 
 class SmartphoneRecurrence(models.Model):

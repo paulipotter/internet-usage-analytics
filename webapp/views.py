@@ -68,6 +68,7 @@ def home(request):
                 col7_dataframe = csv[[column[6]]]
                 col8_dataframe = csv[[column[7]]]
                 col9_dataframe = csv[[column[8]]]
+                col10_dataframe = csv[[column[9]]]
 
                 for value in range(csv.shape[0]):
                     command = ""
@@ -80,6 +81,7 @@ def home(request):
                     col7_value = str(col7_dataframe.at[value,column[6]]) # internet_trust
                     col8_value = str(col8_dataframe.at[value,column[7]]) # preferred_device
                     col9_value = str(col9_dataframe.at[value,column[8]]) # gender
+                    col10_value = str(col10_dataframe.at[value,column[9]]) # age_group
                     Entry.objects.create(entry_id=col1_value,
                                          household_size=col2_value,
                                          age=col3_value,
@@ -88,7 +90,8 @@ def home(request):
                                          news_source=NewsSource.objects.get(key=col6_value),
                                          internet_trust=TrustLevel.objects.get(key=col7_value),
                                          preferred_device=Device.objects.get(key=col8_value),
-                                         gender=Gender.objects.get(key=col9_value))
+                                         gender=Gender.objects.get(key=col9_value),
+                                         age_group=AgeGroup.objects.get(key=col10_value))
                     lin = filename.split(".")[0]+' added ' + str(col1_value) + ' ' + str(col2_value)
                     lin += ' ' + str(col3_value)+ ' ' + str(col4_value)+ ' ' + str(col5_value)
                     lin += ' ' + str(col6_value)+ ' ' + str(col7_value)+ ' ' + str(col8_value)+ ' ' + str(col9_value)
@@ -188,19 +191,34 @@ def home(request):
                     # elif filename.split(".")[0] == "Smartphone":
                     #     Smartphone.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
                     # if filename.split(".")[0] == "Cellphone":
-                    #     Cellphone.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
-                    # elif filename.split(".")[0] == "Tablet":
-                    #     PC.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
-                    # el
-                    # if filename.split(".")[0] == "Smartphone":
-                    Smartphone.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
+                    # Cellphone.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
+                    # # elif filename.split(".")[0] == "Tablet":
+                    Tablet.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
+                    # # el
+                    # # if filename.split(".")[0] == "Smartphone":
+                    # Smartphone.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
                     print(filename.split(".")[0] + " created " + col1_value + " " + col2_value + " "+col3_value +" "+ col4_value)
-
     return render(request, 'home.html')
 
 def results(request):
+    print("results")
 
-    return render(request, 'results.html')
+    donuts = {
+        "gender":[{"label":"female", "count":Entry.objects.filter(gender=2).count()},
+                  {"label":"male", "count":Entry.objects.filter(gender=1).count()}],
+        "age_group":[{"label":"13-17", "count": Entry.objects.filter(age_group=1).count()},
+                     {"label":"18-25", "count": Entry.objects.filter(age_group=2).count()},
+                     {"label":"26-35", "count": Entry.objects.filter(age_group=3).count()},
+                     {"label":"36-45", "count": Entry.objects.filter(age_group=4).count()},
+                     {"label":"46-65", "count": Entry.objects.filter(age_group=5).count()}],
+        "device": [{"label":"Computer","count":Device.objects.filter(key=1).count()},
+                   {"label":"Cellphone","count":Device.objects.filter(key=2).count()},
+                   {"label":"Tablet","count":Device.objects.filter(key=3).count()},
+                   {"label":"Other","count":Device.objects.filter(key=96).count()},
+                   {"label":"Not Sure","count":Device.objects.filter(key=99).count()}]
+    }
+    # print(donuts)
+    return render(request, 'results.html', {"donuts":donuts})
 
 def simple_upload(request):
     return render(request, 'simple_upload.html')
