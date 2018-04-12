@@ -8,3 +8,7 @@ body {
        font-size: 12px;
        border-radius: 0;
 }
+
+#donut-charts {
+    max width: 400px;
+}
