@@ -15,6 +15,7 @@ from django.contrib.auth.models import User
 import json
 import pandas as pd
 
+
 # Create your views here.
 def home(request):
     print("home")
@@ -37,8 +38,8 @@ def home(request):
             # and 2 unique ones
 
             two_col_file = ["SocialMedia.csv", "AgeGroup.csv", "Gender.csv",
-            "NewsSource.csv", "Device.csv", "TrustLevel.csv", "Department.csv",
-            "BinaryEntry.csv", "Recurrence.csv", "ScamType.csv"]
+                "NewsSource.csv", "Device.csv", "TrustLevel.csv", "Department.csv",
+                "BinaryEntry.csv", "Recurrence.csv", "ScamType.csv"]
             recurrence_file = ["LaptopRecurrence.csv",
                                "PCRecurrence.csv", "SmartphoneRecurrence.csv"]
             device_file = ["Tablet.csv", "Smartphone.csv", "PC.csv",
@@ -48,15 +49,15 @@ def home(request):
                 col1_dataframe = csv[[column[0]]]
                 col2_dataframe = csv[[column[1]]]
                 print(column)
-                for value in range(csv.shape[0]): # no. of rows to be read
+                for value in range(csv.shape[0]):  # no. of rows to be read
                     command = ""
-                    col1_value = int(col1_dataframe.at[value,column[0]])
-                    col2_value = str(col2_dataframe.at[value,column[1]])
-                    command = filename.split(".")[0]+".objects.create("+column[0]+"="
-                    command += str(col1_value)+", "+column[1]+"=\'"+str(col2_value)+"\')"
+                    col1_value = int(col1_dataframe.at[value, column[0]])
+                    col2_value = str(col2_dataframe.at[value, column[1]])
+                    command = filename.split(".")[0] + ".objects.create("+column[0]+"="
+                    command += str(col1_value) + ", " + column[1] + "=\'" + str(col2_value)+"\')"
                     print(command)
                     exec(command)
-                messages.info(request, str(filename+" processed"))
+                messages.info(request, str(filename + " processed"))
 
             elif filename == "Entry.csv":
                 col1_dataframe = csv[[column[0]]]
@@ -220,9 +221,11 @@ def results(request):
     # print(donuts)
     return render(request, 'results.html', {"donuts":donuts})
 
+
 def simple_upload(request):
     return render(request, 'simple_upload.html')
 
-def three(request):
-    print("three\n\n\n")
-    return render(request, 'three.html')
+
+def acknowledgements(request):
+    print("ack\n\n\n")
+    return render(request, 'acknowledgements.html')
