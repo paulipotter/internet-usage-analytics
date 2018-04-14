@@ -1,16 +1,16 @@
 $(document).ready(function() {
 // $(document).foundation();
-    console.log('doc ready');
+    //console.log('doc ready');
     var i = 0;
     //for (var i = 0; i < 3; i++) {
     //var str = String('#donut-charts'+i)
     var donutData = genData(i);
-    console.log(donutData)
+    //console.log(donutData)
     var id = '#donut-charts'
     var donuts = new DonutCharts();
     var key = "gender";
     var donutData2 = genData2(key);
-    console.log(donutData2)
+    //console.log(donutData2)
     donuts.create(donutData2);
     //console.log("hi")
     //}

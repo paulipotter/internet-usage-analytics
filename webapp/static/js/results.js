@@ -1,11 +1,22 @@
 $(document).ready(function(){
-    animateValue("entries", 0, 900, 1500);
-    console.log("inside results.js")
-})
+
+    console.log('inside results.js')
+    animateValue('entries', 0, 900, 1500);
+
+    var options = {strings: ['Senior Project: Internet Usage in Paraguay'],
+        typeSpeed:40,
+        callback: function () {
+                $('.typed-cursor').hide();
+        } 
+    }
+                $('.typed-cursor').hide();
+    var title = new Typed('#title', options)
+                $('.typed-cursor').hide();
+});
 // https://stackoverflow.com/questions/16994662/count-animation-from-number-a-to-b
 function animateValue(id, start, end, duration) {
     //assumes integer values for start and end
-
+    console.log('inside animate')
     var obj = document.getElementById(id);
     var range = end - start;
 
