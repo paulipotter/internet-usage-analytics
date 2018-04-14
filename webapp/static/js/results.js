@@ -2,6 +2,10 @@ $(document).ready(function(){
 
     console.log('inside results.js')
     animateValue('entries', 0, 900, 1500);
+    var op = 
+        {strings : ['  people completed the survey'],
+         typeSpeed: 40};
+        var entries_txt = new Typed('#entries-txt',op);
 
     var options = {strings: ['Senior Project: Internet Usage in Paraguay'],
         typeSpeed:40,
