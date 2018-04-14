@@ -1,23 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load js_injector %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/donut.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/results.css' %}"/>
-<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.min.css" /> -->
 
 {% load staticfiles %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/foundation.css' %}"/>
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/donut.css' %}"/> -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/results.css' %}"/> -->
+
+<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.min.css" /> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.min.css">
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="{% static 'js/jquery.js' %}" charset="utf-8"></script>
+<script src="{% static 'js/what-input.js' %}" charset="utf-8"></script>
+<script src="{% static 'js/foundation.min.js' %}" charset="utf-8"></script>
 <script src="{% static 'js/donut.js' %}" charset="utf-8"></script>
-{% js_injector %}
-<script src="{% static 'js/results.js' %}" charset="utf-8"></script>
+<script src="{% static 'js/donut.js' %}" charset="utf-8"></script>
 <script type="text/javascript">
     var donuts = {{donuts|safe}}
 </script>
 <div class="grid-x">
-    <div class="other-content">
-    <h1>This is results</h1>
+    <div class="small-4 cell">
+    <div class="container"><h1>This is results</h1></div>
+    </div>
+    <div class="small-4 cell">
+    <div class="container"><h1>This is results</h1></div>
     </div>
 </div>
 
