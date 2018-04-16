@@ -1148,8 +1148,8 @@
         "ADM1NAME": "Central",
         "ISO_A2": "PY",
         "NOTE": null,
-        "LATITUDE": -25.5302,
-        "LONGITUDE": -57.8291,
+        "LATITUDE": -25.366667,
+        "LONGITUDE": -54.75,
         "CHANGED": 4,
         "NAMEDIFF": 1,
         "DIFFNOTE": "Added missing admin-1 capital. Population from GeoNames.",
@@ -1167,8 +1167,8 @@
         "GEONAMESNO": "GeoNames match with ascii name + lat + long whole numbers.",
         "UN_FID": 0,
         "UN_ADM0": null,
-        "UN_LAT": -25.5302,
-        "UN_LONG": -57.8291,
+        "UN_LAT": -25.366667,
+        "UN_LONG": -54.75,
         "CITYALT": null,
         "min_zoom": 8,
         "CAPALT": null,
@@ -1179,8 +1179,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -57.8291,
-          -25.5302
+          -54.75,
+          -25.366667
         ]
       }
     }
