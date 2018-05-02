@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.min.css">
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="//d3js.org/topojson.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
 <script type="text/javascript">
     var donuts = {{ donuts|safe }}
     var country = "{% static 'js/countries.topo.json' %}"
@@ -22,6 +22,7 @@
 <script src="{% static 'js/foundation.min.js' %}" charset="utf-8"></script>
 <script src="{% static 'js/results.js' %}" charset="utf-8"></script>
 <script src="{% static 'js/donut.js' %}" charset="utf-8"></script>
+<script src="{% static 'js/gauge.js' %}" charset="utf-8"></script>
 <script src="{% static 'js/map.js' %}" charset="utf-8"></script>
 <script src ="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
 <div class="grid-x grid-padding-x align-center">
@@ -35,20 +36,27 @@
 
 <div class="grid-x grid-padding-x align-center">
     <div class="small-2 cell align-right" >
-        <div class="container" align="right" id="entries"></div> 
+        <div class="container" align="right" id="entries"></div>
     </div>
     <div class="small-5 cell align-left">
-        <div class="container" id="entries-txt"></div> 
+        <div class="container" id="entries-txt"></div>
     </div>
 </div>
 <div class="grid-x grid-padding-x align-center">
-    <div class="cell">    
+    <div class="cell">
         <div id="donut-charts"></div>
+    </div>
+    <div class="cell">
+        <svg id="fillgauge1" width="97%" height="250" ></svg>
+        <svg id="fillgauge2" width="19%" height="200" ></svg>
+        <svg id="fillgauge3" width="19%" height="200" ></svg>
+
     </div>
     <div class="cell">
         <div id="map">
         </div>
     </div>
+
 </div>
 
 

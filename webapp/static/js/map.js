@@ -2,19 +2,25 @@ $('document').ready(function(){
 
     console.log('inside map js')
 
+    var width = 900;
+    var height = 600;
+
+    var projection = d3.geo.mercator();
+
+    var svg = d3.select("#map").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+    var path = d3.geo.path()
+      .projection(projection);
+    var g = svg.append("g");
+
+
     //create variables
+    console.log("before");
     var m_width = $("#map").width(),
-        width = 938,
-        height = 500,
         country,
         state;
-
-    var projection = d3.geo.mercator()
-        .scale(150)
-        .translate([width / 2, height / 1.5]);
-
-    var path = d3.geo.path()
-        .projection(projection);
+        console.log("w");
 
     var svg = d3.select("#map").append("svg")
         .attr("preserveAspectRatio", "xMidYMid")
@@ -26,7 +32,7 @@ $('document').ready(function(){
         .attr("class", "background")
         .attr("width", width)
         .attr("height", height)
-
+console.log("svg");
     var g = svg.append("g");
 
     d3.json("/static/maps/countries.topo.json", function(error, topology) {
@@ -39,7 +45,8 @@ $('document').ready(function(){
         .attr("id", function(d) { return d.id; })
         .attr("d", path)
     });
-
+    /*
+console.log("d3 json");
     d3.json("/static/maps/states.topo.json", function(error, topology) {
       g.append("g")
         .attr("id", "states")
@@ -78,7 +85,7 @@ $('document').ready(function(){
       svg.attr("height", w * height / width);
     });
 
-});
+});*/
 function zoom(xyz,g,path) {
   g.transition()
     .duration(750)
