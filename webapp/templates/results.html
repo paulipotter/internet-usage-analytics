@@ -16,6 +16,7 @@
 <script type="text/javascript">
     var donuts = {{ donuts|safe }}
     var country = "{% static 'js/countries.topo.json' %}"
+    var news_source = {{ news_source|safe }}
 </script>
 <script src="{% static 'js/jquery.js' %}" charset="utf-8"></script>
 <script src="{% static 'js/what-input.js' %}" charset="utf-8"></script>
@@ -28,7 +29,9 @@
 <div class="grid-x grid-padding-x align-center">
     <div class="cell">
     <h2 id="title"></h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere ipsum vitae diam mattis mattis. Nam at ultricies urna, ut placerat massa. Duis id hendrerit justo. Morbi bibendum, leo eu placerat cursus, elit augue ullamcorper dolor, at ornare orci elit rutrum mi. Duis eu consectetur enim. Morbi maximus urna quis lobortis feugiat. Fusce quis magna et ante viverra tincidunt quis eget lectus.
+    <p>This is a survey taken by 900 individuals from the most populated areas of Paraguay.
+        This thing had 3 files, the CSV with all the data, a TXT file that contained the
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere ipsum vitae diam mattis mattis. Nam at ultricies urna, ut placerat massa. Duis id hendrerit justo. Morbi bibendum, leo eu placerat cursus, elit augue ullamcorper dolor, at ornare orci elit rutrum mi. Duis eu consectetur enim. Morbi maximus urna quis lobortis feugiat. Fusce quis magna et ante viverra tincidunt quis eget lectus.
 
     Phasellus libero tortor, dapibus ut dapibus eu, euismod nec magna. Vivamus non mauris dapibus, tempus ligula id, efficitur lectus. Nam magna elit, sagittis eget egestas et, mattis id nulla. Integer a consequat est. Suspendisse iaculis ac sem ut facilisis. Proin molestie, mi sed porta rutrum, nulla arcu vehicula ex, bibendum consequat erat arcu sed ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris vestibulum metus massa, nec pulvinar enim sagittis eget. Curabitur venenatis, sapien ac tempor vestibulum, urna odio vulputate justo, vel euismod nulla erat id tortor. Donec in interdum arcu, sit amet blandit felis. Quisque sollicitudin, massa id bibendum ultrices, orci metus posuere lorem, nec cursus felis dolor at justo.</p>
     </div>
@@ -42,19 +45,31 @@
         <div class="container" id="entries-txt"></div>
     </div>
 </div>
+
 <div class="grid-x grid-padding-x align-center">
     <div class="cell">
         <div id="donut-charts"></div>
     </div>
+</div>
+<div class="grid-x grid-padding-x align-center">
+        <div class="cell medium-5 align-right" >
+            <svg id="fillgauge2" width="100%" ></svg>
+        </div>
+        <div class="cell medium-6 align-left">
+            <div class="container" id="tv-txt"></div>
+            <p></p>
+        </div>
+</div>
+<div class="grid-x grid-padding-x align-center">
     <div class="cell">
-        <svg id="fillgauge1" width="97%" height="250" ></svg>
-        <svg id="fillgauge2" width="19%" height="200" ></svg>
-        <svg id="fillgauge3" width="19%" height="200" ></svg>
-
+        <svg id="fillgauge3" width="150%" height="300" ></svg>
     </div>
     <div class="cell">
-        <div id="map">
-        </div>
+        <svg id="fillgauge4" width="150%" height="200" ></svg>
+    </div>
+    <div class="cell">
+    <!--    <div id="map">
+    </div> -->
     </div>
 
 </div>

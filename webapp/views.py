@@ -219,14 +219,23 @@ def results(request):
                    {"label":"Not Sure","count":Entry.objects.filter(preferred_device=99).count()}]
     }
 
+    news_source = {
+        "printed_media" : {"label":"Printed Media", "count":Entry.objects.filter(news_source=3).count()},
+        "social_media" : {"label":"Social Media", "count":Entry.objects.filter(news_source=5).count()},
+        "tv" : {"label":"Television", "count":Entry.objects.filter(news_source=1).count()}
+    }
+    print("printed",Entry.objects.filter(news_source=3).count())
+    print("sm",Entry.objects.filter(news_source=5).count())
+    print("tv",Entry.objects.filter(news_source=1).count())
+
     counts = {
         "printed_media" : {"label":"Printed Media", "count":Entry.objects.filter(news_source=3).count()},
-        "scammed" : {"label":"Scammed","count":Scam.objects.filter().count()},
+        "scammed" : {"label":"Scammed", "count":Scam.objects.filter().count()},
         "trustable": {"label":"Internet is trustable", "count":Entry.objects.filter(internet_trust=1).count()}
 
     }
     # print(donuts)
-    return render(request, 'results.html', {"donuts":donuts, "counts":counts})
+    return render(request, 'results.html', {"donuts":donuts, "news_source":news_source})
 
 
 def simple_upload(request):

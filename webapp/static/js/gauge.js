@@ -1,25 +1,37 @@
-var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
+$('document').ready(function(){
+    console.log(news_source);
+
     var config1 = liquidFillGaugeDefaultSettings();
-    config1.circleColor = "#FF7777";
-    config1.textColor = "#FF4444";
-    config1.waveTextColor = "#FFAAAA";
-    config1.waveColor = "#FFDDDD";
-    config1.circleThickness = 0.2;
-    config1.textVertPosition = 0.2;
+    config1.circleThickness = 0.15;
+    config1.circleColor = "#234b8c";
+    config1.textColor = "#234b8c";
+    config1.waveTextColor = "#234b8c";
+    config1.waveColor = "#4d86e2";
+    config1.textVertPosition = 0.8;
     config1.waveAnimateTime = 1000;
-    var gauge2= loadLiquidFillGauge("fillgauge2", 28, config1);
+    config1.waveHeight = 0.05;
+    config1.waveAnimate = true;
+    config1.waveRise = false;
+    config1.waveHeightScaling = false;
+    config1.waveOffset = 0.25;
+    config1.textSize = 0.75;
+    config1.waveCount = 3;
+    var gauge2= loadLiquidFillGauge("fillgauge2", (news_source["tv"]["count"])/900, config1);
+
     var config2 = liquidFillGaugeDefaultSettings();
-    config2.circleColor = "#D4AB6A";
+    config2.circleColor = "#1a7f43";
     config2.textColor = "#553300";
-    config2.waveTextColor = "#805615";
-    config2.waveColor = "#AA7D39";
+    config2.waveTextColor = "#1a7f43";
+    config2.waveColor = "#1fad58";
     config2.circleThickness = 0.1;
     config2.circleFillGap = 0.2;
     config2.textVertPosition = 0.8;
     config2.waveAnimateTime = 2000;
     config2.waveHeight = 0.3;
     config2.waveCount = 1;
-    var gauge3 = loadLiquidFillGauge("fillgauge3", 60.1, config2);
+    config2.displayPercent = false;
+    var gauge3 = loadLiquidFillGauge("fillgauge3", (news_source["printed_media"]["count"]), config2);
+
     var config3 = liquidFillGaugeDefaultSettings();
     config3.textVertPosition = 0.8;
     config3.waveAnimateTime = 5000;
@@ -27,24 +39,13 @@ var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
     config3.waveAnimate = false;
     config3.waveOffset = 0.25;
     config3.valueCountUp = false;
-    config3.displayPercent = false;
-    var gauge4 = loadLiquidFillGauge("fillgauge4", 50, config3);
-    var config4 = liquidFillGaugeDefaultSettings();
-    config4.circleThickness = 0.15;
-    config4.circleColor = "#808015";
-    config4.textColor = "#555500";
-    config4.waveTextColor = "#FFFFAA";
-    config4.waveColor = "#AAAA39";
-    config4.textVertPosition = 0.8;
-    config4.waveAnimateTime = 1000;
-    config4.waveHeight = 0.05;
-    config4.waveAnimate = true;
-    config4.waveRise = false;
-    config4.waveHeightScaling = false;
-    config4.waveOffset = 0.25;
-    config4.textSize = 0.75;
-    config4.waveCount = 3;
-    var gauge5 = loadLiquidFillGauge("fillgauge5", 60.44, config4);
+    config3.displayPercent = true;
+    config3.waveCount = 2;
+    var gauge4 = loadLiquidFillGauge("fillgauge4", (news_source["social_media"]["count"])/900, config3);
+
+});
+    /*
+    var gauge5 = loadLiquidFillGauge("fillgauge5", 60.44, config1);
     var config5 = liquidFillGaugeDefaultSettings();
     config5.circleThickness = 0.4;
     config5.circleColor = "#6DA398";
@@ -62,7 +63,7 @@ var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
     config5.maxValue = 150
     config5.displayPercent = false;
     var gauge6 = loadLiquidFillGauge("fillgauge6", 120, config5);
-/*
+
     function NewValue(){
         if(Math.random() > .5){
             return Math.round(Math.random()*100);
@@ -110,7 +111,7 @@ function loadLiquidFillGauge(elementId, value, config) {
     var radius = Math.min(parseInt(gauge.style("width")), parseInt(gauge.style("height")))/2;
     var locationX = parseInt(gauge.style("width"))/2 - radius;
     var locationY = parseInt(gauge.style("height"))/2 - radius;
-    var fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value))/config.maxValue;
+    var fillPercent = value;
 
     var waveHeightScale;
     if(config.waveHeightScaling){
@@ -125,7 +126,7 @@ function loadLiquidFillGauge(elementId, value, config) {
 
     var textPixels = (config.textSize*radius/2);
     var textFinalValue = parseFloat(value).toFixed(2);
-    var textStartValue = config.valueCountUp?config.minValue:textFinalValue;
+    var textStartValue = value; //config.valueCountUp?config.minValue:textFinalValue;
     var percentText = config.displayPercent?"%":"";
     var circleThickness = config.circleThickness * radius;
     var circleFillGap = config.circleFillGap * radius;
@@ -272,6 +273,7 @@ function loadLiquidFillGauge(elementId, value, config) {
             });
     }
 
+/*
     function GaugeUpdater(){
         this.update = function(value){
             var newFinalValue = parseFloat(value).toFixed(2);
@@ -335,7 +337,7 @@ function loadLiquidFillGauge(elementId, value, config) {
                 .duration(config.waveRiseTime)
                 .attr('transform','translate('+waveGroupXPosition+','+newHeight+')')
         }
-    }
+    }*/
 
-    return new GaugeUpdater();
+    //return new GaugeUpdater();
 }

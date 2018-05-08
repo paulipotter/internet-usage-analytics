@@ -45,6 +45,7 @@ console.log("svg");
         .attr("id", function(d) { return d.id; })
         .attr("d", path)
     });
+});
     /*
 console.log("d3 json");
     d3.json("/static/maps/states.topo.json", function(error, topology) {
@@ -85,7 +86,7 @@ console.log("d3 json");
       svg.attr("height", w * height / width);
     });
 
-});*/
+});
 function zoom(xyz,g,path) {
   g.transition()
     .duration(750)
@@ -104,4 +105,4 @@ function get_xyz(d,path) {
   var x = (bounds[1][0] + bounds[0][0]) / 2;
   var y = (bounds[1][1] + bounds[0][1]) / 2 + (height / z / 6);
   return [x, y, z];
-}
+}*/

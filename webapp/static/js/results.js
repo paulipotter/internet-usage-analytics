@@ -2,20 +2,22 @@ $(document).ready(function(){
 
     console.log('inside results.js')
     animateValue('entries', 0, 900, 1500);
-    var op = 
-        {strings : ['  people completed the survey'],
-         typeSpeed: 40};
+    var op = {strings : ['  people completed the survey'], typeSpeed: 40};
         var entries_txt = new Typed('#entries-txt',op);
 
     var options = {strings: ['Senior Project: Internet Usage in Paraguay'],
         typeSpeed:40,
         callback: function () {
                 $('.typed-cursor').hide();
-        } 
+        }
     }
                 $('.typed-cursor').hide();
     var title = new Typed('#title', options)
-                $('.typed-cursor').hide();
+    $('.typed-cursor').hide();
+
+    var tv_txt = {strings: ['watch TV as means to get informed on news'],typeSpeed:40}
+    var tv = new Typed('#tv-txt', tv_txt)
+    $('.typed-cursor').hide();
 });
 // https://stackoverflow.com/questions/16994662/count-animation-from-number-a-to-b
 function animateValue(id, start, end, duration) {
