@@ -141,10 +141,10 @@ function loadLiquidFillGauge(elementId, value, config) {
     // Rounding functions so that the correct number of decimal places is always displayed as the value counts up.
     var textRounder = function(value){ return Math.round(value); };
     if(parseFloat(textFinalValue) != parseFloat(textRounder(textFinalValue))){
-        textRounder = function(value){ return parseFloat(value).toFixed(1); };
+        textRounder = function(value){ return parseFloat((value*100)).toFixed(1); };
     }
     if(parseFloat(textFinalValue) != parseFloat(textRounder(textFinalValue))){
-        textRounder = function(value){ return parseFloat(value).toFixed(2); };
+        textRounder = function(value){ return parseFloat((value*100)).toFixed(0); };
     }
 
     // Data for building the clip wave area.

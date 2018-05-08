@@ -1,15 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+
+
+#title {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 6em;
+    margin: 3em 1em 5em 1em;
+}
 
 #entries {
     font-family: 'Do Hyeon', sans-serif;
     text-align:right;
-    font-size: 2em;
+    font-size: 5em;
 }
 
 #entries-txt {
     font-family: 'Do Hyeon', sans-serif;
     text-align: left;
-    font-size: 2em;
+    font-size: 3em;
 }
 #fillgauge2 {
     display: block;
@@ -19,4 +27,19 @@
     font-family: 'Do Hyeon', sans-serif;
     text-align: left;
     font-size: 3em;
+    margin: 3em 0em 0em 2em;
+}
+
+#description {
+    font-size: 2em;
+    font-family: 'Work Sans', sans-serif;
+    margin: 5em 1em 5em 1em;
+
+}
+#ent {
+    margin: 5em 1em 5em 1em;
+}
+
+#tv-ent {
+    margin: 5em 1em 5em 1em;
 }

@@ -1,7 +1,18 @@
 $(document).ready(function(){
-
+    window.sr = ScrollReveal();
     console.log('inside results.js')
+
+
+    //title
+    window.setTimeout( function() {
+        var title = new Typed('#title', options)
+        $('.typed-cursor').hide();
+    },1000);
+
+    sr.reveal('#description', { container: '#description' });
+
     animateValue('entries', 0, 900, 1500);
+
     var op = {strings : ['  people completed the survey'], typeSpeed: 40};
         var entries_txt = new Typed('#entries-txt',op);
 
@@ -12,8 +23,8 @@ $(document).ready(function(){
         }
     }
                 $('.typed-cursor').hide();
-    var title = new Typed('#title', options)
-    $('.typed-cursor').hide();
+
+
 
     var tv_txt = {strings: ['watch TV as means to get informed on news'],typeSpeed:40}
     var tv = new Typed('#tv-txt', tv_txt)
