@@ -1,6 +1,6 @@
 $('document').ready(function(){
 
-    console.log('inside map js')
+    console.log('map')
 
     var width = 900;
     var height = 600;
@@ -16,11 +16,11 @@ $('document').ready(function(){
 
 
     //create variables
-    console.log("before");
+    // console.log("before");
     var m_width = $("#map").width(),
         country,
         state;
-        console.log("w");
+        // console.log("w");
 
     var svg = d3.select("#map").append("svg")
         .attr("preserveAspectRatio", "xMidYMid")
@@ -32,7 +32,7 @@ $('document').ready(function(){
         .attr("class", "background")
         .attr("width", width)
         .attr("height", height)
-console.log("svg");
+// console.log("svg");
     var g = svg.append("g");
 
     d3.json("/static/maps/countries.topo.json", function(error, topology) {

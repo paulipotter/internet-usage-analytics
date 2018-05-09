@@ -1,5 +1,5 @@
 $('document').ready(function(){
-    console.log(news_source);
+    console.log("gauge");
 
     var config1 = liquidFillGaugeDefaultSettings();
     config1.circleThickness = 0.15;
@@ -27,21 +27,21 @@ $('document').ready(function(){
     config2.circleFillGap = 0.2;
     config2.textVertPosition = 0.8;
     config2.waveAnimateTime = 2000;
-    config2.waveHeight = 0.3;
+    config2.waveHeight = 0.2;
     config2.waveCount = 1;
-    config2.displayPercent = false;
-    var gauge3 = loadLiquidFillGauge("fillgauge3", (news_source["printed_media"]["count"]), config2);
+    config2.displayPercent = true;
+    var gauge3 = loadLiquidFillGauge("fillgauge3", ((counts["millenials"]["count"])/(counts["millenials"]["total"])), config2);
 
     var config3 = liquidFillGaugeDefaultSettings();
     config3.textVertPosition = 0.8;
     config3.waveAnimateTime = 5000;
     config3.waveHeight = 0.15;
-    config3.waveAnimate = false;
+    config3.waveAnimate = true;
     config3.waveOffset = 0.25;
     config3.valueCountUp = false;
     config3.displayPercent = true;
     config3.waveCount = 2;
-    var gauge4 = loadLiquidFillGauge("fillgauge4", (news_source["social_media"]["count"])/900, config3);
+    var gauge4 = loadLiquidFillGauge("fillgauge4", ((counts["baby_boomers"]["count"])/(counts["baby_boomers"]["total"])), config3);
 
 });
     /*
@@ -196,8 +196,9 @@ function loadLiquidFillGauge(elementId, value, config) {
     var text1 = gaugeGroup.append("text")
         .text(textRounder(textStartValue) + percentText)
         .attr("class", "liquidFillGaugeText")
+        .attr("id", "gauge_text")
         .attr("text-anchor", "middle")
-        .attr("font-size", textPixels + "px")
+        .attr("font-size","5em")//, textPixels + "px")
         .style("fill", config.textColor)
         .attr('transform','translate('+radius+','+textRiseScaleY(config.textVertPosition)+')');
 
@@ -227,8 +228,9 @@ function loadLiquidFillGauge(elementId, value, config) {
     var text2 = fillCircleGroup.append("text")
         .text(textRounder(textStartValue) + percentText)
         .attr("class", "liquidFillGaugeText")
+        .attr("id", "gauge_text")
         .attr("text-anchor", "middle")
-        .attr("font-size", textPixels + "px")
+        .attr("font-size", "5em")//textPixels + "px")
         .style("fill", config.waveTextColor)
         .attr('transform','translate('+radius+','+textRiseScaleY(config.textVertPosition)+')');
 
