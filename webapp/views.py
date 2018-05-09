@@ -11,6 +11,7 @@ from .models import Department, BinaryEntry, Recurrence, ScamType, LaptopRecurre
 from .models import PCRecurrence, SmartphoneRecurrence, Tablet, Smartphone
 from .models import PC, Laptop, Cellphone, Entry, City, Scam
 import ast
+from django.db.models import Max, Min
 from django.contrib.auth.models import User
 import json
 #import pandas as pd
@@ -223,7 +224,18 @@ def results(request):
         "printed_media" : {"label":"Printed Media", "count":Entry.objects.filter(news_source=3).count()},
         "social_media" : {"label":"Social Media", "count":Entry.objects.filter(news_source=5).count()},
         "tv" : {"label":"Television", "count":Entry.objects.filter(news_source=1).count()}
+        #"" : {"label":, "count":}
     }
+
+    age_min = Entry.objects.all().aggregate(Min('age'))
+    age_max = Entry.objects.all().aggregate(Max('age'))
+    internet_trust = {
+        "trust_level" : {"Very Trustable":1,"Trustable":2,"Little Trust":3,"No Trust":4,"Not Sure":99},
+        "age_domain" : [age_min,age_max],
+        "trust" : {"Very trustable":"", "count":Entry.objects.filter().count()}
+    }
+
+
     print("printed",Entry.objects.filter(news_source=3).count())
     print("sm",Entry.objects.filter(news_source=5).count())
     print("tv",Entry.objects.filter(news_source=1).count())
@@ -231,11 +243,17 @@ def results(request):
     counts = {
         "printed_media" : {"label":"Printed Media", "count":Entry.objects.filter(news_source=3).count()},
         "scammed" : {"label":"Scammed", "count":Scam.objects.filter().count()},
-        "trustable": {"label":"Internet is trustable", "count":Entry.objects.filter(internet_trust=1).count()}
-
+        "trustable": {"label":"Internet is trustable", "count":Entry.objects.filter(internet_trust=1).count()},
+        "millenials":{  "count":Entry.objects.filter(laptop__utilize = 1, age_group = 2).count(),
+                        "string":"Millenials use laptops",
+                        "total":Entry.objects.filter(age_group=2).count()},
+        "baby_boomers":{"label":"Millenials and Laptops",
+                        "count":Entry.objects.filter(smartphone__utilize = 1, age_group = 5).count(),
+                        "string":"Baby Boomers use smartphones",
+                        "total":Entry.objects.filter(age_group=5).count()}
     }
     # print(donuts)
-    return render(request, 'results.html', {"donuts":donuts, "news_source":news_source})
+    return render(request, 'results.html', {"donuts":donuts, "news_source":news_source, "internet_trust":internet_trust, "counts":counts})
 
 
 def simple_upload(request):
