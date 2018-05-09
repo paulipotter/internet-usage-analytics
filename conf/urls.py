@@ -30,11 +30,11 @@ urlpatterns = [ path('admin/', admin.site.urls),
 
 # Debug Toolbar
 if settings.DEBUG:
-    import debug_toolbar
+    #import debug_toolbar
     from django.contrib.staticfiles import views as staticviews
     from django.conf.urls.static import static
     urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
+        #url(r'^__debug__/', include(debug_toolbar.urls)),
         url(r'^static/(?P<path>.*)$', staticviews.serve),
     ]
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

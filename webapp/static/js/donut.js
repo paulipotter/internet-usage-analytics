@@ -1,6 +1,6 @@
 $(document).ready(function() {
 // $(document).foundation();
-    //console.log('doc ready');
+    console.log('donuts');
     var i = 0;
     //for (var i = 0; i < 3; i++) {
     //var str = String('#donut-charts'+i)
@@ -36,7 +36,6 @@ $(document).ready(function() {
 
 function DonutCharts(id) {
     var charts = d3.select('#donut-charts');
-    console.log("donut charts")
     var chart_m, chart_r, color = d3.scale.category20();
     // var getCatNames = function(dataset) {
     //         var catNames = new Array();
