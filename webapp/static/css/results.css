@@ -13,13 +13,14 @@
 #entries {
     font-family: 'Do Hyeon', sans-serif;
     text-align:right;
-    font-size: 5em;
+    font-size: 8em;
 }
 
 #entries-txt {
     font-family: 'Do Hyeon', sans-serif;
     text-align: left;
-    font-size: 3em;
+    font-size: 5em;
+    margin-top: 0.5em;
 }
 #fillgauge2, #fillgauge3, #fillgauge4 {
     display: block;
@@ -41,6 +42,10 @@
     margin: 5em 1em 5em 1em;
 }
 
-#ent {
+#ent0{
     margin: 5em 1em 5em 1em;
+}
+
+#ent1, #ent2, #ent3, #ent4, #ent-donuts {
+    margin: 20em 1em 7em 1em;
 }

@@ -1,6 +1,15 @@
 $(document).ready(function() {
 // $(document).foundation();
     console.log('donuts');
+
+    //console.log("hi")
+    //}
+    //$('#refresh-btn').on('click', function refresh() {donuts.update(genData);});
+    // var donuts2 = new DonutCharts2();
+    // donuts2.create(donutData);
+});
+
+function loadDonuts(){
     var i = 0;
     //for (var i = 0; i < 3; i++) {
     //var str = String('#donut-charts'+i)
@@ -12,12 +21,7 @@ $(document).ready(function() {
     var donutData2 = genData2(key);
     //console.log(donutData2)
     donuts.create(donutData2);
-    //console.log("hi")
-    //}
-    $('#refresh-btn').on('click', function refresh() {donuts.update(genData);});
-    // var donuts2 = new DonutCharts2();
-    // donuts2.create(donutData);
-});
+}
 
 // $(document).ready(
 //     function() {
@@ -122,7 +126,7 @@ function DonutCharts(id) {
 
             thisDonut.select('.value')
                 .text(function(d) {
-                    console.log(thisDonut.selectAll('.clicked').data())
+                    //console.log(thisDonut.selectAll('.clicked').data())
 
                     return (sum)? sum + d.unit
                                 : 'total: ' + d.total + d.unit;

@@ -1,6 +1,9 @@
 $('document').ready(function(){
     console.log("gauge");
 
+});
+function load1(){
+    console.log("gauge1")
     var config1 = liquidFillGaugeDefaultSettings();
     config1.circleThickness = 0.15;
     config1.circleColor = "#234b8c";
@@ -17,7 +20,8 @@ $('document').ready(function(){
     config1.textSize = 0.75;
     config1.waveCount = 3;
     var gauge2= loadLiquidFillGauge("fillgauge2", (news_source["tv"]["count"])/900, config1);
-
+}
+function load2(){
     var config2 = liquidFillGaugeDefaultSettings();
     config2.circleColor = "#1a7f43";
     config2.textColor = "#553300";
@@ -31,7 +35,10 @@ $('document').ready(function(){
     config2.waveCount = 1;
     config2.displayPercent = true;
     var gauge3 = loadLiquidFillGauge("fillgauge3", ((counts["millenials"]["count"])/(counts["millenials"]["total"])), config2);
+}
 
+function load3()
+{
     var config3 = liquidFillGaugeDefaultSettings();
     config3.textVertPosition = 0.8;
     config3.waveAnimateTime = 5000;
@@ -42,8 +49,8 @@ $('document').ready(function(){
     config3.displayPercent = true;
     config3.waveCount = 2;
     var gauge4 = loadLiquidFillGauge("fillgauge4", ((counts["baby_boomers"]["count"])/(counts["baby_boomers"]["total"])), config3);
+}
 
-});
     /*
     var gauge5 = loadLiquidFillGauge("fillgauge5", 60.44, config1);
     var config5 = liquidFillGaugeDefaultSettings();
