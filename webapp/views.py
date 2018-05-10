@@ -229,16 +229,25 @@ def results(request):
 
     age_min = Entry.objects.all().aggregate(Min('age'))
     age_max = Entry.objects.all().aggregate(Max('age'))
+
     internet_trust = {
         "trust_level" : {"Very Trustable":1,"Trustable":2,"Little Trust":3,"No Trust":4,"Not Sure":99},
         "age_domain" : [age_min,age_max],
         "trust" : {"Very trustable":"", "count":Entry.objects.filter().count()}
     }
+    n = Entry.objects.values('entry_id','age', 'internet_trust','gender')
+    nodes = []
+    for item in n:
+        nodes.append({
+            "id":item["entry_id"],
+            "x":item["age"],
+            "y":item["internet_trust"],
+            "gender":item["gender"]
+        })
 
+    values = list(Entry.objects.values_list('age', flat=True))
+    print(nodes)
 
-    print("printed",Entry.objects.filter(news_source=3).count())
-    print("sm",Entry.objects.filter(news_source=5).count())
-    print("tv",Entry.objects.filter(news_source=1).count())
 
     counts = {
         "printed_media" : {"label":"Printed Media", "count":Entry.objects.filter(news_source=3).count()},
@@ -253,7 +262,7 @@ def results(request):
                         "total":Entry.objects.filter(age_group=5).count()}
     }
     # print(donuts)
-    return render(request, 'results.html', {"donuts":donuts, "news_source":news_source, "internet_trust":internet_trust, "counts":counts})
+    return render(request, 'results.html', {"donuts":donuts, "news_source":news_source, "internet_trust":internet_trust, "counts":counts, "nodes":nodes, "values":values})
 
 
 def simple_upload(request):
