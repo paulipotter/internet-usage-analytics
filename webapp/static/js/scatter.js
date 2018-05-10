@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	console.log("scatter");
   var state = {
     data: {
       nodes: null
@@ -61,40 +60,40 @@ $(document).ready(function() {
   var neutral = g.append('line')
     .attr('class', 'neutral-line');
 
-  function updateChart(data) {
+  function updateChart() {
 	 // console.log(d.value);
-    var xLevels = data.levels.x;
-    var yLevels = data.levels.y;
-    var values = [];
-    var nodes = [];
+    //var xLevels = data.levels.x;
+    // var yLevels = data.levels.y;
+    // var values = [];
+    // var nodes =
+	//console.log("xlevel " + xLevels)
+    // data.observations.map(function(d) {
+    //   values.push(d.value);
+	//   // console.log(d);
+    //   nodes.push({
+    //     xLevel: xLevels[d.x],
+    //     yLevel: yLevels[d.y],
+    //     value: d.value
+    //   })
+    // })
 
-
-    data.observations.map(function(d) {
-      values.push(d.value);
-	  //console.log(d);
-      nodes.push({
-        xLevel: xLevels[d.x],
-        yLevel: yLevels[d.y],
-        value: d.value
-      })
-    })
-
-    chart.height = yLevels.length * chart.levelHeight;
+	var len = 5
+    chart.height = len * chart.levelHeight;
     height = chart.height + margin.top + margin.bottom;
 
     var valueDomain = d3.extent(values);
-	console.log("value Domain" + valueDomain);
-    var x = getXScale(xLevels, valueDomain);
+	//console.log("value Domain" + valueDomain);
+    var x = getXScale(values, valueDomain);
 
     var y = d3.scale.ordinal()
-      .domain(yLevels)
+      .domain(5)
       .rangeBands([0, chart.height]);
 
-    var positiveColors = d3.scale.quantize()
+    var femaleColors = d3.scale.quantize()
       .domain([0, valueDomain[1]])
       .range(['#52beda', '#3691a8', '#206d81']);
 
-    var negativeColors = d3.scale.linear()
+    var maleColors = d3.scale.linear()
       .domain([0, valueDomain[0]])
       .range(['#fc8e80', '#d53a26', '#be311f']);
 
@@ -119,9 +118,10 @@ $(document).ready(function() {
       x: x,
       y: y,
       color: {
-        positive: positiveColors,
-        negative: negativeColors
+        female: femaleColors,
+        male: maleColors
       }
+
     }
 
     state.data = {
@@ -129,7 +129,7 @@ $(document).ready(function() {
     };
 
     state.domains = {
-      x: xLevels,
+      x: values,
       values: valueDomain
     }
 
@@ -174,8 +174,8 @@ $(document).ready(function() {
       .attr('class', 'node')
       .attr('r', 5)
       .style('opacity', 0)
-      .on('mousemove', handleMousemove)
-      .on('mouseout', handleMouseout)
+      // .on('mousemove', handleMousemove)
+      // .on('mouseout', handleMouseout)
 
     node.transition()
       .delay(function(d, i) { return i*3 })
@@ -185,7 +185,7 @@ $(document).ready(function() {
       .attr('stroke', getStroke)
       .attr('fill', getFill)
       .style('opacity', 1);
-  }
+  }//end update
 
   function getXScale(xLevels, valueDomain) {
     return d3.scale.linear()
@@ -211,6 +211,7 @@ $(document).ready(function() {
   function getYPosition(d, i) {
     var position = state.scales.y(d.yLevel) +
         state.scales.y.rangeBand()/2;
+	console.log("position " + position)
 
     if (jitter.checked) {
       return i%2 === 0 ?
@@ -223,14 +224,14 @@ $(document).ready(function() {
 
   function getStroke(d) {
     return d.value >= 0 ?
-        d3.rgb(state.scales.color.positive(d.value)).darker(.5)
-      : d3.rgb(state.scales.color.negative(d.value)).darker(.5)
+        d3.rgb(state.scales.color.female(d.value)).darker(.5)
+      : d3.rgb(state.scales.color.male(d.value)).darker(.5)
   }
 
   function getFill(d) {
-    return d.value >= 0 ?
-        d3.rgb(state.scales.color.positive(d.value))
-      : d3.rgb(state.scales.color.negative(d.value))
+    return d.gender == "1" ?
+        d3.rgb(state.scales.color.female(d.value))
+      : d3.rgb(state.scales.color.male(d.value))
   }
 
   /**
@@ -293,50 +294,50 @@ $(document).ready(function() {
 
   var tooltip = d3.select(chart.tooltip);
 
-  function handleMousemove(d, i) {
-    var mousePosition = d3.mouse(this);
-
-    tooltip
-      .style('left', mousePosition[0] - 60 + 'px')
-      .style('top', mousePosition[1] - 50 + 'px')
-      .style('opacity', 1)
-      .style('z-index', 10);
-
-    tooltip.select('.y-level').html(d.yLevel)
-    tooltip.select('.x-level').html(d.xLevel + ': ')
-    tooltip.select('.value').html(parseInt(d.value*100) + '%')
-    tooltip.select('.value').style('color', function() {
-      return d.value >= 0 ?
-          state.scales.color.positive(d.value)
-        : state.scales.color.negative(d.value)
-    })
-  }
-
-  function handleMouseout(d, i) {
-    tooltip
-      .style('opacity', 0)
-      .style('z-index', -1)
-
-    d3.select(chart.container).selectAll('.node')
-      .style('opacity', 1)
-  }
+  // function handleMousemove(d, i) {
+  //   var mousePosition = d3.mouse(this);
+  //
+  //   tooltip
+  //     .style('left', mousePosition[0] - 60 + 'px')
+  //     .style('top', mousePosition[1] - 50 + 'px')
+  //     .style('opacity', 1)
+  //     .style('z-index', 10);
+  //
+  //   tooltip.select('.y-level').html(d.yLevel)
+  //   tooltip.select('.x-level').html(d.xLevel + ': ')
+  //   tooltip.select('.value').html(parseInt(d.value*100) + '%')
+  //   tooltip.select('.value').style('color', function() {
+  //     return d.gender == 1 ?
+  //         state.scales.color.female(d.gender)
+  //       : state.scales.color.male(d.gender)
+  //   })
+  // }
+  //
+  // function handleMouseout(d, i) {
+  //   tooltip
+  //     .style('opacity', 0)
+  //     .style('z-index', -1)
+  //
+  //   d3.select(chart.container).selectAll('.node')
+  //     .style('opacity', 1)
+  // }
 
   /**
   * Bind data loaders to the controls
   **/
 
   var container = document.querySelector('#discrete-scatterplot-selects'),
-      rows = internet_trust["trust_level"].keys(),
-      points = container.querySelector('#scatterplot-points'),
-	  console.log('points'+type(points))
-      jitter = container.querySelector('#jitterbug-perfume'),
+      // rows = internet_trust["trust_level"].keys(),
+      // points = "age"
+	  //console.log('points'+type(points))
+      jitter = container.querySelector('#jitterbug-perfume')
       // discretize = container.querySelector('#discretize'),
-      selects = container.querySelectorAll('select');
+      // selects = container.querySelectorAll('select');
 
-  for (var i=0; i<selects.length; i++) {
-    var elem = selects[i];
-    elem.addEventListener('change', redraw);
-  }
+  // for (var i=0; i<selects.length; i++) {
+  //   var elem = selects[i];
+  //   elem.addEventListener('change', redraw);
+  // }
 
   jitter.addEventListener('change', handleJitter)
   // discretize.addEventListener('change', handleDiscretize)
@@ -345,21 +346,20 @@ $(document).ready(function() {
   * Function to return path to the current data
   **/
 
-  function getDatafilePath() {
-    var y = rows.value;
-    var x = points.value;
-    return chart.data.dir + y + '_' + x + '.json';
-  }
+  // function getDatafilePath() {
+  //   var y = rows.value;
+  //   var x = points.value;
+  //   return chart.data.dir + y + '_' + x + '.json';
+  // }
 
   /**
   * Main function that triggers chart updates
+
   **/
 
-  function redraw() {
-    d3.json(getDatafilePath(), updateChart);
-  };
+
 
   // initialize the chart
-  redraw();
+  updateChart();
 
 });

@@ -21,18 +21,21 @@
     var news_source = {{ news_source|safe }}
     var internet_trust = {{ internet_trust|safe }}
     var counts = {{ counts|safe }}
+    var nodes = {{ nodes|safe }}
+    var values  = {{ values|safe }}
 </script>
 <script src="{% static 'js/jquery.js' %}" charset="utf-8"></script>
 <script src="{% static 'js/what-input.js' %}" charset="utf-8"></script>
 <script src="{% static 'js/foundation.min.js' %}" charset="utf-8"></script>
 <script src="{% static 'js/results.js' %}" charset="utf-8"></script>
 <script src="{% static 'js/donut.js' %}" charset="utf-8"></script>
-<script src="{% static 'js/gauge.js' %}" charset="utf-8"></script>
+<!-- <script src="{% static 'js/gauge.js' %}" charset="utf-8"></script> -->
 <script src="{% static 'js/map.js' %}" charset="utf-8"></script>
 <script src="{% static 'js/scatter.js' %}" charset="utf-8"></script>
 <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Merriweather'>
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js'></script>
 <script src ="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
+<script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
 <div class="grid-x grid-padding-x align-center">
     <div class="cell">
     <h2 id="title"></h2>
@@ -41,7 +44,7 @@
         to 900 individuals from all over the country. The survey is available on the Paraguayan open data website.</div>
 </div>
 
-<div class="grid-x grid-padding-x align-center" id="ent">
+<div class="grid-x grid-padding-x align-center" id="ent1">
     <div class="small-2 cell align-right" >
         <div class="container" align="right" id="entries"></div>
     </div>
@@ -55,7 +58,7 @@
         <div id="donut-charts"></div>
     </div>
 </div>
-<div class="grid-x grid-padding-x align-center" id="ent">
+<div class="grid-x grid-padding-x align-center" id="ent2">
         <div class="cell medium-5 align-right" >
             <svg id="fillgauge2" width="150%" height="400" ></svg>
         </div>
@@ -64,7 +67,7 @@
 
         </div>
 </div>
-<div class="grid-x grid-padding-x align-center" id="ent">
+<div class="grid-x grid-padding-x align-center" id="ent3">
     <div class="cell medium-5 align-right" >
         <svg id="fillgauge3" width="150%" height="400" ></svg>
     </div>
@@ -73,7 +76,7 @@
 
     </div>
 </div>
-<div class="grid-x grid-padding-x align-center" id="ent">
+<div class="grid-x grid-padding-x align-center" id="ent4">
     <div class="cell medium-5 align-right" >
         <svg id="fillgauge4" width="150%" height="400" ></svg>
     </div>
@@ -87,7 +90,7 @@
     <div class="cell">
         <div class='container' id='scatter-container'>
       <div id='discrete-scatterplot-selects' class='center-selects'>
-        <div class='select-container'>
+        <!-- <div class='select-container'>
           <label>Rows:</label>
           <select id='scatterplot-rows'>
             <option value='occupations' selected>Occupation</option>
@@ -97,18 +100,18 @@
             <option value='nationalities'>Nationality</option>
             <option value='writing'>Writing</option>
           </select>
-        </div>
+        </div> -->
 
         <div class='select-container'>
           <label>Points:</label>
-          <select id='scatterplot-points'>
+          <!-- <select id='scatterplot-points'>
             <option value='occupations' selected>Occupation</option>
             <option value='gender'>Gender</option>
             <option value='education'>Education</option>
             <option value='religion'>Religion</option>
             <option value='nationalities'>Nationality</option>
             <option value='writing'>Writing</option>
-          </select>
+          </select> -->
         </div>
 
         <div class='select-container'>
