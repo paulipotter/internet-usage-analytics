@@ -326,8 +326,9 @@ $(document).ready(function() {
   **/
 
   var container = document.querySelector('#discrete-scatterplot-selects'),
-      rows = container.querySelector('#scatterplot-rows'),
+      rows = internet_trust["trust_level"].keys(),
       points = container.querySelector('#scatterplot-points'),
+	  console.log('points'+type(points))
       jitter = container.querySelector('#jitterbug-perfume'),
       // discretize = container.querySelector('#discretize'),
       selects = container.querySelectorAll('select');
