@@ -193,7 +193,7 @@ function loadLiquidFillGauge(elementId, value, config) {
         .attr('transform','translate('+radius+','+radius+')');
 
     // Text where the wave does not overlap.
-    var text1 = gaugeGroup.append("text")
+    var text11 = gaugeGroup.append("text")
         .text(textRounder(textStartValue) + percentText)
         .attr("class", "liquidFillGaugeText")
         .attr("id", "gauge_text")
@@ -225,7 +225,7 @@ function loadLiquidFillGauge(elementId, value, config) {
         .style("fill", config.waveColor);
 
     // Text where the wave does overlap.
-    var text2 = fillCircleGroup.append("text")
+    var text222 = fillCircleGroup.append("text")
         .text(textRounder(textStartValue) + percentText)
         .attr("class", "liquidFillGaugeText")
         .attr("id", "gauge_text")
@@ -240,10 +240,10 @@ function loadLiquidFillGauge(elementId, value, config) {
             var i = d3.interpolate(this.textContent, textFinalValue);
             return function(t) { this.textContent = textRounder(i(t)) + percentText; }
         };
-        text1.transition()
+        text11.transition()
             .duration(config.waveRiseTime)
             .tween("text", textTween);
-        text2.transition()
+        text222.transition()
             .duration(config.waveRiseTime)
             .tween("text", textTween);
     }
@@ -292,10 +292,10 @@ function loadLiquidFillGauge(elementId, value, config) {
                 return function(t) { this.textContent = textRounderUpdater(i(t)) + percentText; }
             };
 
-            text1.transition()
+            text11.transition()
                 .duration(config.waveRiseTime)
                 .tween("text", textTween);
-            text2.transition()
+            text222.transition()
                 .duration(config.waveRiseTime)
                 .tween("text", textTween);
 
