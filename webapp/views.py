@@ -350,6 +350,6 @@ def upload(request):
     #                 print(filename.split(".")[0] + " created " + col1_value + " " + col2_value + " "+col3_value +" "+ col4_value)
     return render(request, 'upload.html')
 
-def presentation(request):
-    print("presentation")
+def senior_presentation(request):
+    print("senior_presentation")
     return render(request, 'presentation.html')

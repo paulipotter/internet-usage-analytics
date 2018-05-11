@@ -26,7 +26,7 @@ urlpatterns = [ path('admin/', admin.site.urls),
                 path('', views.home, name='home'),
                 path('results/', views.results, name='results'),
                 path('acknowledgements/', views.acknowledgements, name='acknowledgements'),
-                path('presentation/', views.presentation, name='presentation')
+                path('senior_presentation/', views.senior_presentation, name='senior_presentation')
                 ]
 
 # Debug Toolbar
