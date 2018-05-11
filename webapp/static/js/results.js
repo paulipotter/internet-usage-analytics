@@ -85,6 +85,10 @@ $(document).ready(function(){
     });
     $('.typed-cursor').hide();
 
+    sr.reveal('#test1', {
+      duration: 1000
+    });
+
     // GENERAL SETTING
 
     // Custom Settings

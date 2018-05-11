@@ -14,6 +14,7 @@ import ast
 from django.db.models import Max, Min
 from django.contrib.auth.models import User
 import json
+from random import uniform
 #import pandas as pd
 
 
@@ -250,8 +251,50 @@ def results(request):
                         "string":"Baby Boomers use smartphones",
                         "total":Entry.objects.filter(age_group=5).count()}
     }
+
+    n = Entry.objects.values('entry_id','age', 'internet_trust','gender')
+    nodes = [{
+    "key":"female",
+    "values":[],
+    "color":"#339CFF"},
+    {
+    "key":"male",
+    "values":[],
+    "color":"#74DC68"}]
+    #print(nodes)
+    for item in n:
+        if item["gender"] == 1: #
+            if item["internet_trust"] == 99:
+                nodes[0]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(5-0.3,5+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+            else:
+                nodes[0]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(item["internet_trust"]-0.3,item["internet_trust"]+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+        else: #male
+            if item["internet_trust"] == 99:
+                nodes[0]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(5-0.3,5+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+            else:
+                nodes[1]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(item["internet_trust"]-0.3,item["internet_trust"]+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
     # print(donuts)
-    return render(request, 'results.html', {"donuts":donuts, "news_source":news_source, "internet_trust":internet_trust, "counts":counts})
+    return render(request, 'results.html', {"donuts":donuts, "news_source":news_source, "internet_trust":internet_trust, "counts":counts,"nodes":nodes})
 
 
 def simple_upload(request):
@@ -260,35 +303,50 @@ def simple_upload(request):
 
 def acknowledgements(request):
     print("ack\n\n\n")
+
     n = Entry.objects.values('entry_id','age', 'internet_trust','gender')
     nodes = [{
     "key":"female",
     "values":[],
-    "color":"#FF6666"},
+    "color":"#339CFF"},
     {
     "key":"male",
     "values":[],
-    "color":"#62a3d0"}]
+    "color":"#74DC68"}]
     #print(nodes)
     for item in n:
-        if item["internet_trust"] == 99:
-            continue
         if item["gender"] == 1: #
-            nodes[0]["values"].append({
-                "x":item["age"],
-                "y":item["internet_trust"],
-                "shape":"circle",
-                "size":0.7
-            })
+            if item["internet_trust"] == 99:
+                nodes[0]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(5-0.3,5+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+            else:
+                nodes[0]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(item["internet_trust"]-0.3,item["internet_trust"]+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
         else: #male
-            nodes[1]["values"].append({
-                "x":item["age"],
-                "y":item["internet_trust"],
-                "shape":"circle",
-                "size":0.7
-            })
+            if item["internet_trust"] == 99:
+                nodes[0]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(5-0.3,5+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+            else:
+                nodes[1]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(item["internet_trust"]-0.3,item["internet_trust"]+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
 
 
     #values = list(Entry.objects.values_list('age', flat=True))
     #print("nodes", nodes)
-    return render(request, 'acknowledgements.html',{"nodes":nodes})
+    return render(request, 'acknowledgements.html', {"nodes":nodes})
