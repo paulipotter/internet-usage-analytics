@@ -165,7 +165,7 @@ def acknowledgements(request):
 
     #values = list(Entry.objects.values_list('age', flat=True))
     #print("nodes", nodes)
-    return render(request, 'acknowledgements.html', {"nodes":nodes})
+    return render(request, 'presentation.html', {"nodes":nodes})
 
 def upload(request):
     # when "upload file" gets clicked
