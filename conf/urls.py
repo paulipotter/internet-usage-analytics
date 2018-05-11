@@ -22,11 +22,12 @@ from webapp import views
 from django.contrib.auth import views as auth_views
 admin.autodiscover()
 
-urlpatterns = [ path('admin/', admin.site.urls),
+urlpatterns = [ path('senior_presentation/', views.senior_presentation, name='senior_presentation'),
+                path('admin/', admin.site.urls),
                 path('', views.home, name='home'),
                 path('results/', views.results, name='results'),
-                path('acknowledgements/', views.acknowledgements, name='acknowledgements'),
-                path('senior_presentation/', views.senior_presentation, name='senior_presentation')
+                path('acknowledgements/', views.acknowledgements, name='acknowledgements')
+
                 ]
 
 # Debug Toolbar
