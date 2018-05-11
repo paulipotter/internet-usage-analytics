@@ -406,13 +406,7 @@ class SmartphoneRecurrence(models.Model):
 				transition: "slide",
 				backgroundTransition: "slide",
 				center: false,
-				controls:true,
-				dependencies: [
-					{ src: "{% static 'plugin/markdown/marked.js' %}" },
-					{ src: "{% static 'plugin/markdown/markdown.js' %}" },
-					{ src: "{% static 'plugin/notes/notes.js' %}", async: true },
-					{ src: "{% static 'plugin/highlight/highlight.js' %}", async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
+				controls:true
 			});
 		</script>
 	</body>
