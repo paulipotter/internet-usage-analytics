@@ -25,7 +25,8 @@ admin.autodiscover()
 urlpatterns = [ path('admin/', admin.site.urls),
                 path('', views.home, name='home'),
                 path('results/', views.results, name='results'),
-                path('acknowledgements/', views.acknowledgements, name='acknowledgements')
+                path('acknowledgements/', views.acknowledgements, name='acknowledgements'),
+                path('presentation/', views.presentation, name='presentation')
                 ]
 
 # Debug Toolbar
