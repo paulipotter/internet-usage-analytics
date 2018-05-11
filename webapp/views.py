@@ -235,18 +235,7 @@ def results(request):
         "age_domain" : [age_min,age_max],
         "trust" : {"Very trustable":"", "count":Entry.objects.filter().count()}
     }
-    n = Entry.objects.values('entry_id','age', 'internet_trust','gender')
-    nodes = []
-    for item in n:
-        nodes.append({
-            "id":item["entry_id"],
-            "x":item["age"],
-            "y":item["internet_trust"],
-            "gender":item["gender"]
-        })
 
-    values = list(Entry.objects.values_list('age', flat=True))
-    print(nodes)
 
 
     counts = {
@@ -262,7 +251,7 @@ def results(request):
                         "total":Entry.objects.filter(age_group=5).count()}
     }
     # print(donuts)
-    return render(request, 'results.html', {"donuts":donuts, "news_source":news_source, "internet_trust":internet_trust, "counts":counts, "nodes":nodes, "values":values})
+    return render(request, 'results.html', {"donuts":donuts, "news_source":news_source, "internet_trust":internet_trust, "counts":counts})
 
 
 def simple_upload(request):
@@ -271,4 +260,35 @@ def simple_upload(request):
 
 def acknowledgements(request):
     print("ack\n\n\n")
-    return render(request, 'acknowledgements.html')
+    n = Entry.objects.values('entry_id','age', 'internet_trust','gender')
+    nodes = [{
+    "key":"female",
+    "values":[],
+    "color":"#FF6666"},
+    {
+    "key":"male",
+    "values":[],
+    "color":"#62a3d0"}]
+    #print(nodes)
+    for item in n:
+        if item["internet_trust"] == 99:
+            continue
+        if item["gender"] == 1: #
+            nodes[0]["values"].append({
+                "x":item["age"],
+                "y":item["internet_trust"],
+                "shape":"circle",
+                "size":0.7
+            })
+        else: #male
+            nodes[1]["values"].append({
+                "x":item["age"],
+                "y":item["internet_trust"],
+                "shape":"circle",
+                "size":0.7
+            })
+
+
+    #values = list(Entry.objects.values_list('age', flat=True))
+    #print("nodes", nodes)
+    return render(request, 'acknowledgements.html',{"nodes":nodes})
