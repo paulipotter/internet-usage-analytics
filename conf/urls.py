@@ -27,7 +27,6 @@ urlpatterns = [ path('senior_presentation/', views.senior_presentation, name='se
                 path('', views.home, name='home'),
                 path('results/', views.results, name='results'),
                 path('acknowledgements/', views.acknowledgements, name='acknowledgements')
-
                 ]
 
 # Debug Toolbar
