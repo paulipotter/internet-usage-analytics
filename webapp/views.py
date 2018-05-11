@@ -21,6 +21,157 @@ from random import uniform
 # Create your views here.
 def home(request):
     print("home")
+    return render(request, 'home.html')
+
+def results(request):
+    print("results")
+
+    donuts = {
+        "gender":[{"label":"female", "count":Entry.objects.filter(gender=2).count()},
+                  {"label":"male", "count":Entry.objects.filter(gender=1).count()}],
+        "age_group":[{"label":"13-17", "count": Entry.objects.filter(age_group=1).count()},
+                     {"label":"18-25", "count": Entry.objects.filter(age_group=2).count()},
+                     {"label":"26-35", "count": Entry.objects.filter(age_group=3).count()},
+                     {"label":"36-45", "count": Entry.objects.filter(age_group=4).count()},
+                     {"label":"46-65", "count": Entry.objects.filter(age_group=5).count()}],
+        "device": [{"label":"Computer","count":Entry.objects.filter(preferred_device=1).count()},
+                   {"label":"Cellphone","count":Entry.objects.filter(preferred_device=2).count()},
+                   {"label":"Tablet","count":Entry.objects.filter(preferred_device=3).count()},
+                   {"label":"Other","count":Entry.objects.filter(preferred_device=96).count()},
+                   {"label":"Not Sure","count":Entry.objects.filter(preferred_device=99).count()}]
+    }
+
+    news_source = {
+        "printed_media" : {"label":"Printed Media", "count":Entry.objects.filter(news_source=3).count()},
+        "social_media" : {"label":"Social Media", "count":Entry.objects.filter(news_source=5).count()},
+        "tv" : {"label":"Television", "count":Entry.objects.filter(news_source=1).count()}
+        #"" : {"label":, "count":}
+    }
+
+    age_min = Entry.objects.all().aggregate(Min('age'))
+    age_max = Entry.objects.all().aggregate(Max('age'))
+
+    internet_trust = {
+        "trust_level" : {"Very Trustable":1,"Trustable":2,"Little Trust":3,"No Trust":4,"Not Sure":99},
+        "age_domain" : [age_min,age_max],
+        "trust" : {"Very trustable":"", "count":Entry.objects.filter().count()}
+    }
+
+
+
+    counts = {
+        "printed_media" : {"label":"Printed Media", "count":Entry.objects.filter(news_source=3).count()},
+        "scammed" : {"label":"Scammed", "count":Scam.objects.filter().count()},
+        "trustable": {"label":"Internet is trustable", "count":Entry.objects.filter(internet_trust=1).count()},
+        "millenials":{  "count":Entry.objects.filter(laptop__utilize = 1, age_group = 2).count(),
+                        "string":"Millenials use laptops",
+                        "total":Entry.objects.filter(age_group=2).count()},
+        "baby_boomers":{"label":"Millenials and Laptops",
+                        "count":Entry.objects.filter(smartphone__utilize = 1, age_group = 5).count(),
+                        "string":"Baby Boomers use smartphones",
+                        "total":Entry.objects.filter(age_group=5).count()}
+    }
+
+    n = Entry.objects.values('entry_id','age', 'internet_trust','gender')
+    nodes = [{
+    "key":"female",
+    "values":[],
+    "color":"#339CFF"},
+    {
+    "key":"male",
+    "values":[],
+    "color":"#74DC68"}]
+    #print(nodes)
+    for item in n:
+        if item["gender"] == 1: #
+            if item["internet_trust"] == 99:
+                nodes[0]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(5-0.3,5+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+            else:
+                nodes[0]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(item["internet_trust"]-0.3,item["internet_trust"]+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+        else: #male
+            if item["internet_trust"] == 99:
+                nodes[0]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(5-0.3,5+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+            else:
+                nodes[1]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(item["internet_trust"]-0.3,item["internet_trust"]+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+    # print(donuts)
+    return render(request, 'results.html', {"donuts":donuts, "news_source":news_source, "internet_trust":internet_trust, "counts":counts,"nodes":nodes})
+
+
+def simple_upload(request):
+    return render(request, 'simple_upload.html')
+
+
+def acknowledgements(request):
+    print("ack\n\n\n")
+
+    n = Entry.objects.values('entry_id','age', 'internet_trust','gender')
+    nodes = [{
+    "key":"female",
+    "values":[],
+    "color":"#339CFF"},
+    {
+    "key":"male",
+    "values":[],
+    "color":"#74DC68"}]
+    #print(nodes)
+    for item in n:
+        if item["gender"] == 1: #
+            if item["internet_trust"] == 99:
+                nodes[0]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(5-0.3,5+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+            else:
+                nodes[0]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(item["internet_trust"]-0.3,item["internet_trust"]+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+        else: #male
+            if item["internet_trust"] == 99:
+                nodes[0]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(5-0.3,5+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+            else:
+                nodes[1]["values"].append({
+                    "x":item["age"],
+                    "y":round(uniform(item["internet_trust"]-0.3,item["internet_trust"]+0.3), 3),
+                    "shape":"circle",
+                    "size":round(uniform(0.01,1), 3)
+                });
+
+
+    #values = list(Entry.objects.values_list('age', flat=True))
+    #print("nodes", nodes)
+    return render(request, 'acknowledgements.html', {"nodes":nodes})
+
+def upload(request):
     # when "upload file" gets clicked
     # if request.method == 'POST':
     #     new_types = request.FILES['myfile']
@@ -201,152 +352,4 @@ def home(request):
     #                 # # if filename.split(".")[0] == "Smartphone":
     #                 # Smartphone.objects.create(entry_id=entry, quantity=col2_value, utilize= use, home=hom)
     #                 print(filename.split(".")[0] + " created " + col1_value + " " + col2_value + " "+col3_value +" "+ col4_value)
-    return render(request, 'home.html')
-
-def results(request):
-    print("results")
-
-    donuts = {
-        "gender":[{"label":"female", "count":Entry.objects.filter(gender=2).count()},
-                  {"label":"male", "count":Entry.objects.filter(gender=1).count()}],
-        "age_group":[{"label":"13-17", "count": Entry.objects.filter(age_group=1).count()},
-                     {"label":"18-25", "count": Entry.objects.filter(age_group=2).count()},
-                     {"label":"26-35", "count": Entry.objects.filter(age_group=3).count()},
-                     {"label":"36-45", "count": Entry.objects.filter(age_group=4).count()},
-                     {"label":"46-65", "count": Entry.objects.filter(age_group=5).count()}],
-        "device": [{"label":"Computer","count":Entry.objects.filter(preferred_device=1).count()},
-                   {"label":"Cellphone","count":Entry.objects.filter(preferred_device=2).count()},
-                   {"label":"Tablet","count":Entry.objects.filter(preferred_device=3).count()},
-                   {"label":"Other","count":Entry.objects.filter(preferred_device=96).count()},
-                   {"label":"Not Sure","count":Entry.objects.filter(preferred_device=99).count()}]
-    }
-
-    news_source = {
-        "printed_media" : {"label":"Printed Media", "count":Entry.objects.filter(news_source=3).count()},
-        "social_media" : {"label":"Social Media", "count":Entry.objects.filter(news_source=5).count()},
-        "tv" : {"label":"Television", "count":Entry.objects.filter(news_source=1).count()}
-        #"" : {"label":, "count":}
-    }
-
-    age_min = Entry.objects.all().aggregate(Min('age'))
-    age_max = Entry.objects.all().aggregate(Max('age'))
-
-    internet_trust = {
-        "trust_level" : {"Very Trustable":1,"Trustable":2,"Little Trust":3,"No Trust":4,"Not Sure":99},
-        "age_domain" : [age_min,age_max],
-        "trust" : {"Very trustable":"", "count":Entry.objects.filter().count()}
-    }
-
-
-
-    counts = {
-        "printed_media" : {"label":"Printed Media", "count":Entry.objects.filter(news_source=3).count()},
-        "scammed" : {"label":"Scammed", "count":Scam.objects.filter().count()},
-        "trustable": {"label":"Internet is trustable", "count":Entry.objects.filter(internet_trust=1).count()},
-        "millenials":{  "count":Entry.objects.filter(laptop__utilize = 1, age_group = 2).count(),
-                        "string":"Millenials use laptops",
-                        "total":Entry.objects.filter(age_group=2).count()},
-        "baby_boomers":{"label":"Millenials and Laptops",
-                        "count":Entry.objects.filter(smartphone__utilize = 1, age_group = 5).count(),
-                        "string":"Baby Boomers use smartphones",
-                        "total":Entry.objects.filter(age_group=5).count()}
-    }
-
-    n = Entry.objects.values('entry_id','age', 'internet_trust','gender')
-    nodes = [{
-    "key":"female",
-    "values":[],
-    "color":"#339CFF"},
-    {
-    "key":"male",
-    "values":[],
-    "color":"#74DC68"}]
-    #print(nodes)
-    for item in n:
-        if item["gender"] == 1: #
-            if item["internet_trust"] == 99:
-                nodes[0]["values"].append({
-                    "x":item["age"],
-                    "y":round(uniform(5-0.3,5+0.3), 3),
-                    "shape":"circle",
-                    "size":round(uniform(0.01,1), 3)
-                });
-            else:
-                nodes[0]["values"].append({
-                    "x":item["age"],
-                    "y":round(uniform(item["internet_trust"]-0.3,item["internet_trust"]+0.3), 3),
-                    "shape":"circle",
-                    "size":round(uniform(0.01,1), 3)
-                });
-        else: #male
-            if item["internet_trust"] == 99:
-                nodes[0]["values"].append({
-                    "x":item["age"],
-                    "y":round(uniform(5-0.3,5+0.3), 3),
-                    "shape":"circle",
-                    "size":round(uniform(0.01,1), 3)
-                });
-            else:
-                nodes[1]["values"].append({
-                    "x":item["age"],
-                    "y":round(uniform(item["internet_trust"]-0.3,item["internet_trust"]+0.3), 3),
-                    "shape":"circle",
-                    "size":round(uniform(0.01,1), 3)
-                });
-    # print(donuts)
-    return render(request, 'results.html', {"donuts":donuts, "news_source":news_source, "internet_trust":internet_trust, "counts":counts,"nodes":nodes})
-
-
-def simple_upload(request):
-    return render(request, 'simple_upload.html')
-
-
-def acknowledgements(request):
-    print("ack\n\n\n")
-
-    n = Entry.objects.values('entry_id','age', 'internet_trust','gender')
-    nodes = [{
-    "key":"female",
-    "values":[],
-    "color":"#339CFF"},
-    {
-    "key":"male",
-    "values":[],
-    "color":"#74DC68"}]
-    #print(nodes)
-    for item in n:
-        if item["gender"] == 1: #
-            if item["internet_trust"] == 99:
-                nodes[0]["values"].append({
-                    "x":item["age"],
-                    "y":round(uniform(5-0.3,5+0.3), 3),
-                    "shape":"circle",
-                    "size":round(uniform(0.01,1), 3)
-                });
-            else:
-                nodes[0]["values"].append({
-                    "x":item["age"],
-                    "y":round(uniform(item["internet_trust"]-0.3,item["internet_trust"]+0.3), 3),
-                    "shape":"circle",
-                    "size":round(uniform(0.01,1), 3)
-                });
-        else: #male
-            if item["internet_trust"] == 99:
-                nodes[0]["values"].append({
-                    "x":item["age"],
-                    "y":round(uniform(5-0.3,5+0.3), 3),
-                    "shape":"circle",
-                    "size":round(uniform(0.01,1), 3)
-                });
-            else:
-                nodes[1]["values"].append({
-                    "x":item["age"],
-                    "y":round(uniform(item["internet_trust"]-0.3,item["internet_trust"]+0.3), 3),
-                    "shape":"circle",
-                    "size":round(uniform(0.01,1), 3)
-                });
-
-
-    #values = list(Entry.objects.values_list('age', flat=True))
-    #print("nodes", nodes)
-    return render(request, 'acknowledgements.html', {"nodes":nodes})
+    return render(request, 'upload.html')
